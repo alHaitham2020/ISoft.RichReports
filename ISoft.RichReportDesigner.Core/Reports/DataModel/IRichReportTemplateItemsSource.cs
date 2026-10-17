@@ -1,0 +1,26 @@
+﻿using ISoft.Utils.Mvvm;
+using System;
+using System.Threading.Tasks;
+
+namespace ISoft.RichReportDesigner.Core.Reports.DataModel
+{
+    public interface IRichReportTemplateItemsSource
+    {
+        Task OnItemAddedAsync(Guid? key);
+
+        Task OnItemUpdatedAsync(Guid? key);
+
+        Task OnItemDeletedAsync(Guid? key);
+
+        Task OnItemChangedAsync(DataChangeMessageType changeType, Guid? targetId);
+
+        bool IsLoading {  get; }
+
+        void Refresh();
+
+        void LoadIfEmpty();
+
+        void LoadIfNotLoaded();
+    }
+
+}

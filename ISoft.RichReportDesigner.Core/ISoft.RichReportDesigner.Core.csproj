@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ISoft.Core\ISoft.Core.csproj" />
+		<ProjectReference Include="..\ISoft.Utils\ISoft.Utils.csproj" />
+		<ProjectReference Include="..\ISoft.Windows\ISoft.Windows.csproj" />
+		<ProjectReference Include="..\ISoft.Office\ISoft.Office.csproj" />
+		<ProjectReference Include="..\ISoft.Printing.Core\ISoft.Printing.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Helpers\" />
+	</ItemGroup>
+
+	<!-- Add this section to your .csproj file -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+		<Reference Include="System.Printing" />
+		<Reference Include="ReachFramework" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Localization\Resources\ReportResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>ReportResources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Localization\Resources\RichFieldTypeNameResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>RichFieldTypeNameResources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Update="Localization\Resources\ReportResources.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Localization\Resources\RichFieldTypeNameResources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>RichFieldTypeNameResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+	
+</Project>

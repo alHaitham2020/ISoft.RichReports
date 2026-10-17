@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ISoft.RichReportDesigner.Core/ISoft.RichReportDesigner.Core.csproj" />
+  <Project Path="ISoft.RichReportDesigner.UI/ISoft.RichReportDesigner.UI.csproj" />
+</Solution>
