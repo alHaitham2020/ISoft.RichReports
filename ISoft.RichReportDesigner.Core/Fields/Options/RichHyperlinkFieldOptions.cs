@@ -9,7 +9,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
     /// </summary>
     public class RichHyperlinkFieldOptions : RichFormatableFieldOptionsBase
     {
-        public override RichFieldType FieldType => RichFieldType.HyperlinkField;
+        public override RichEditFieldType FieldType => RichEditFieldType.HyperlinkField;
 
         [RichFieldArgument(0)]
         public string Url { get; set; }

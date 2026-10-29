@@ -1,17 +1,17 @@
 ﻿using DevExpress.XtraRichEdit.API.Native;
+using ISoft.Office.Images;
 using ISoft.RichReportDesigner.Core.Fields.Codes;
 using ISoft.RichReportDesigner.Core.Fields.Core;
 using ISoft.RichReportDesigner.Core.Fields.Format;
 using ISoft.RichReportDesigner.Core.Fields.Options;
 using ISoft.RichReportDesigner.Core.Fields.Search;
-using ISoft.RichReportDesigner.Core.Images;
 using System;
 using System.Collections.Generic;
 namespace ISoft.RichReportDesigner.Core.RichEdit.Services
 {
     public interface IRichFieldManagerService
     {
-        Field CreateFieldWithCommonOptions(DocumentPosition position, RichFieldType fieldType, string firstArgument, RichFieldFormat? format = null);
+        Field CreateFieldWithCommonOptions(DocumentPosition position, RichEditFieldType fieldType, string firstArgument, RichFieldFormat? format = null);
 
         Field CreateDateField(DocumentPosition position, RichFieldFormat? format = null);
 
@@ -69,7 +69,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services
 
         string GetFieldFormat(Document document, Field field);
 
-        RichFieldType GetFieldType(string fieldCode);
+        RichEditFieldType GetFieldType(string fieldCode);
 
         bool RowHasDataTableFields(TableRow row);
 
@@ -85,7 +85,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services
 
         void RemoveFieldFormat(Document document, Field field);
 
-        void RemoveFieldsByType(Document document, RichFieldType fieldType);
+        void RemoveFieldsByType(Document document, RichEditFieldType fieldType);
 
         bool RowHasTableRegions(Document document, TableRow row, string collectionPath);
 
@@ -99,17 +99,17 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services
 
         IRichFieldFindResultCollection FindFieldsAtRange(DocumentRange range);
 
-        IRichFieldFindResultCollection FindDocumentFields(Document document, Func<IRichFieldCode, bool> filter, RichFieldSearchScope scope = RichFieldSearchScope.All);
+        IRichFieldFindResultCollection FindDocumentFields(Document document, Func<IRichFieldCode, bool> filter, RichDocumentSearchScope scope = RichDocumentSearchScope.All);
 
-        IRichFieldFindResultCollection FindDocumentFields(Document document, RichFieldSearchScope scope);
+        IRichFieldFindResultCollection FindDocumentFields(Document document, RichDocumentSearchScope scope);
 
-        bool IsDocumentContainsField(Document document, Func<IRichFieldCode, bool> filter, RichFieldSearchScope scope = RichFieldSearchScope.All);
+        bool IsDocumentContainsField(Document document, Func<IRichFieldCode, bool> filter, RichDocumentSearchScope scope = RichDocumentSearchScope.All);
 
         bool RowHasDifferentDataTables(TableRow row, string sourceTableName);
 
         IRichFieldCode GetFieldCode(Field field);
 
-        RichFieldType GetFieldType(Field field);
+        RichEditFieldType GetFieldType(Field field);
 
         void UpdateAllFields(Document document);
 

@@ -12,10 +12,10 @@
                             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
                             mc:Ignorable="d"
                             FontWeight="SemiBold"
-                            Width="600"
+                            Width="700"
                             Height="400"
                             Isoftui:ViewAssist.WindowStyleType="Tool"
-                            Isoftui:ViewAssist.WindowWidth="600" 
+                            Isoftui:ViewAssist.WindowWidth="700" 
                             Isoftui:ViewAssist.WindowHeight="400"
                             Isoftui:ThemeAppearanceFontAssist.ApplyThemeFontToAll="True"
                             Isoftui:SplashScreenAssist.ShowSplashScreenOnLoading="True">    
@@ -47,6 +47,7 @@
             <dxg:GridColumn Width="1*" Header="الوصف" FieldName="DisplayName"/>
             <dxg:GridColumn DefaultSortOrder="Descending" Width="1*" Header="الإسم" FieldName="FieldName" />
             <dxg:GridColumn Width="0.5*" Header="النوع" FieldName="FieldType"/>
+            <dxg:GridColumn Width="0.6*" Header="ضمن جدول" FieldName="IsDetail" Style="{Isoftui:GridControlThemeResource ResourceId=BooleanColumnStyle}" />
             <dxg:GridColumn Width="2*" Header="المعادلة" FieldName="Expression"/>
             <dxg:GridControl.View>
                 <dxg:TableView  AutoWidth="False"

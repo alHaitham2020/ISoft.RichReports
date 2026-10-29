@@ -7,7 +7,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services.Implementation
     {
         static RichEditFieldCalculatorService()
         {
-            RegisterFieldType(RichCustomPropertyField.FieldType, RichCustomPropertyField.Create);
+            RegisterFieldType(RichEditCustomPropertyField.FieldType, RichEditCustomPropertyField.Create);
             RegisterFieldType(RichExpressionEditorCalculatedField.FieldType, RichExpressionEditorCalculatedField.Create);
         }
 

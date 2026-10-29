@@ -1,4 +1,4 @@
-﻿using ISoft.Printing.Core.Data;
+﻿using ISoft.Printing.Shared.Data;
 using ISoft.RichReportDesigner.Core.Data;
 using ISoft.RichReportDesigner.Core.RichEdit.Properties;
 using ISoft.Utils.Helpers;
@@ -14,7 +14,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
     {
         #region Required Fields
         private IReportInfo _reportInfo;
-        private IRichDataSource _dataSource;
+        private IRichReportDataSource _dataSource;
         private IRichReportTemplateStorage _templateStorage;
         private IRichReportTemplateInfoProvider _templateInfoProvider;
         #endregion
@@ -37,7 +37,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
             return this;
         }
 
-        public IRichReportContextBuilder WithDataSource(IRichDataSource dataSource)
+        public IRichReportContextBuilder WithDataSource(IRichReportDataSource dataSource)
         {
             _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
             return this;
@@ -153,7 +153,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
         /// <summary>
         /// Creates a builder with required dependencies
         /// </summary>
-        public static IRichReportContextBuilder Create(IReportInfo reportInfo, IRichDataSource dataSource) =>
+        public static IRichReportContextBuilder Create(IReportInfo reportInfo, IRichReportDataSource dataSource) =>
             new RichReportContextBuilder()
                 .WithReportInfo(reportInfo)
                 .WithDataSource(dataSource);

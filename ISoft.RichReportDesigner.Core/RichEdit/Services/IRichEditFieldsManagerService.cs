@@ -6,26 +6,26 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services
 {
     public interface IRichEditFieldsManagerService
     {
-        IReadOnlyDictionary<RichFieldType, RichFieldInfo> GetAllFieldInfos();
+        IReadOnlyDictionary<RichEditFieldType, RichEditFieldInfo> GetAllFieldInfos();
 
         IEnumerable<string> GetAllFieldNames();
 
-        string GetFieldDisplayName(RichFieldType fieldType);
+        string GetFieldDisplayName(RichEditFieldType fieldType);
 
-        RichFieldInfo? GetFieldInfo(RichFieldType fieldType);
+        RichEditFieldInfo? GetFieldInfo(RichEditFieldType fieldType);
 
-        RichFieldInfo? GetFieldInfoByName(string fieldName);
+        RichEditFieldInfo? GetFieldInfoByName(string fieldName);
 
-        IEnumerable<RichFieldInfo> GetFieldsByType(Type type);
+        IEnumerable<RichEditFieldInfo> GetFieldsByType(Type type);
 
-        RichFieldType? GetFieldTypeByName(string fieldName);
+        RichEditFieldType? GetFieldTypeByName(string fieldName);
 
         bool HasFieldName(string fieldName);
 
-        bool HasFieldType(RichFieldType fieldType);
+        bool HasFieldType(RichEditFieldType fieldType);
 
-        bool TryGetFieldInfo(RichFieldType fieldType, out RichFieldInfo info);
+        bool TryGetFieldInfo(RichEditFieldType fieldType, out RichEditFieldInfo info);
 
-        bool TryGetFieldInfoByName(string fieldName, out RichFieldInfo info);
+        bool TryGetFieldInfoByName(string fieldName, out RichEditFieldInfo info);
     }
 }

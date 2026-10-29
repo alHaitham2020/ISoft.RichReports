@@ -1,7 +1,7 @@
-﻿using ISoft.RichReportDesigner.Core.Fields.Core;
+﻿using ISoft.Office.Images;
+using ISoft.RichReportDesigner.Core.Fields.Core;
 using ISoft.RichReportDesigner.Core.Fields.Data;
 using ISoft.RichReportDesigner.Core.Fields.Format;
-using ISoft.RichReportDesigner.Core.Images;
 using ISoft.RichReportDesigner.Core.RichEdit.Properties;
 using ISoft.Utils.Drawing;
 using System;
@@ -92,7 +92,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         internal void AddCalculatedPropertyField(IRichCalculatedFieldProperty property)
         {
             var displayField = CreatePropertyField(
-                 fieldType: RichFieldType.ExpEditCalculatedField,
+                 fieldType: RichEditFieldType.ExpEditCalculatedField,
                  name: property.Name,
                  displayName: property.DisplayName,
                  dataType: property.PropertyType,
@@ -117,7 +117,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         internal void AddDocumentPropertyField(IRichDocumentProperty property)
         {
             AddPropertyField(
-                fieldType: RichFieldType.DocPropertyField,
+                fieldType: RichEditFieldType.DocPropertyField,
                 name: property.Name,
                 displayName: property.DisplayName,
                 dataType: property.PropertyType,
@@ -129,7 +129,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         internal void AddCustomPropertyField(IRichDocumentCustomProperty property)
         {
             AddPropertyField(
-                fieldType: RichFieldType.CustomPropertyField,
+                fieldType: RichEditFieldType.CustomPropertyField,
                 name: property.Name,
                 displayName: property.DisplayName,
                 dataType: property.PropertyType,
@@ -141,7 +141,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         internal void AddDocumentVaribaleField(IRichDocumentVariableProperty property)
         {
             AddPropertyField(
-                fieldType: RichFieldType.DocVariableField,
+                fieldType: RichEditFieldType.DocVariableField,
                 name: property.Name,
                 displayName: property.DisplayName,
                 dataType: property.PropertyType,
@@ -154,7 +154,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
            string fieldName,
            string displayName,
            Type dataType,
-           RichFieldType fieldType,
+           RichEditFieldType fieldType,
            RichFieldFormat? format = null,
            bool? isVisible = null)
         {
@@ -170,7 +170,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         }
 
         private void AddPropertyField(
-         RichFieldType fieldType,
+         RichEditFieldType fieldType,
          string name,
          string displayName,
          Type dataType,
@@ -189,7 +189,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         }
 
         private RichDisplayField CreatePropertyField(
-         RichFieldType fieldType,
+         RichEditFieldType fieldType,
          string name,
          string displayName,
          Type dataType,
@@ -209,7 +209,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         }
 
         protected RichDisplayField CreateField(
-            RichFieldType fieldType,
+            RichEditFieldType fieldType,
             string name,
             string displayName,
             string fieldProperty,

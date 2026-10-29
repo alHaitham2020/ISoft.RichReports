@@ -21,7 +21,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
         }
 
         #region IRichFieldCodeBuilder Implemenation
-        public IRichFieldCode CreateField(RichFieldType fieldType)
+        public IRichFieldCode CreateField(RichEditFieldType fieldType)
         {
             return new RichFieldCode(fieldType);
         }
@@ -63,7 +63,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
         /// <summary>
         /// Creates a new field code
         /// </summary>
-        public IRichFieldCode CreateFieldWithCommonOptions(RichFieldType fieldType, string firstArguemnt, RichFieldFormat? format = null)
+        public IRichFieldCode CreateFieldWithCommonOptions(RichEditFieldType fieldType, string firstArguemnt, RichFieldFormat? format = null)
         {
             var options = RichCommonFieldsOptions.Create(fieldType, firstArguemnt, format);
             return CreateFieldWithOptions(options);
@@ -174,7 +174,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
         /// </summary>
         public IRichFieldCode CreateDateField(RichFieldFormat? format = null)
         {
-            return CreateDateField(RichDateBasedFieldOptions.Create(RichFieldType.DateField, format));
+            return CreateDateField(RichDateBasedFieldOptions.Create(RichEditFieldType.DateField, format));
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
         /// </summary>
         public IRichFieldCode CreateTimeField(RichFieldFormat? format = null)
         {
-            var options = RichFormatableFieldOptions.Create(RichFieldType.TimeField, format);
+            var options = RichFormatableFieldOptions.Create(RichEditFieldType.TimeField, format);
             return CreateFieldWithOptions(options);
         }
 
@@ -199,7 +199,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
         /// </summary>
         public IRichFieldCode CreatePageField()
         {
-            return new RichFieldCode(RichFieldType.PageField);
+            return new RichFieldCode(RichEditFieldType.PageField);
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
         /// </summary>
         public IRichFieldCode CreateNumPagesField()
         {
-            return new RichFieldCode(RichFieldType.NumPagesField);
+            return new RichFieldCode(RichEditFieldType.NumPagesField);
         }
 
         /// <summary>

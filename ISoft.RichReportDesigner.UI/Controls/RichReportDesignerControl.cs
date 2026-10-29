@@ -1,28 +1,18 @@
 ﻿using DevExpress.Mvvm.UI.Native;
-using DevExpress.Xpf.Reports.UserDesigner;
-using DevExpress.XtraRichEdit;
-using DevExpress.XtraRichEdit.API.Layout;
-using DevExpress.XtraRichEdit.Layout;
 using ISoft.Mvvm.Helpers;
 using ISoft.Mvvm.Native;
-using ISoft.Printing.Core.Helpers;
 using ISoft.RichReportDesigner.Core.Designer;
-using ISoft.RichReportDesigner.Core.Fields.Core;
 using ISoft.RichReportDesigner.Core.Fields.Display;
 using ISoft.RichReportDesigner.Core.Reports;
 using ISoft.RichReportDesigner.Core.Reports.DataModel;
 using ISoft.RichReportDesigner.Core.RichEdit;
-using ISoft.RichReportDesigner.Core.RichEdit.Highlighting;
 using ISoft.RichReportDesigner.Core.RichEdit.Services;
 using ISoft.RichReportDesigner.Core.Templates;
 using ISoft.RichReportDesigner.UI.Controllers;
 using ISoft.RichReportDesigner.UI.DataModel;
 using ISoft.RichReportDesigner.UI.Internal;
-using ISoft.Utils.Data.AsyncData;
-using ISoft.Utils.Enumrations;
 using ISoft.Utils.Extentions;
 using ISoft.Utils.Helpers;
-using ISoft.Utils.Localization;
 using ISoft.Utils.Mvvm;
 using System;
 using System.ComponentModel;
@@ -142,10 +132,11 @@ namespace ISoft.RichReportDesigner.UI.Controls
 
         #region Proprties
 
-        public bool IsLoading { get; set; }
+        public bool IsLoading { get; private set; }
 
         public bool IsReady => !IsLoading && Report != null && ActiveReportTemplate != null;
 
+        // used in designer xaml
         public XpfRichEditorControl EditControl => editor;
 
         //protected internal RichEditSearchPanel RichEditSearchPanel
@@ -255,8 +246,6 @@ namespace ISoft.RichReportDesigner.UI.Controls
         {
             isDesignerLoaded = false;
             IsLoading = true;
-            DetachFromEditor();
-            ClearVisualComponents();
             base.OnApplyTemplate();
             InitializeVisualComponents();
             isDesignerLoaded = true;
@@ -264,148 +253,28 @@ namespace ISoft.RichReportDesigner.UI.Controls
 
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                AttachToEditor();
-                ConfigureEditor();
+                dragDropManager.Install(fieldsPanel, editor);
+                Controller.Editor.Install(editor);
             }
         }
 
         #endregion
 
         #region Actions
-        private void ClearVisualComponents()
-        {
-
-        }
-
         private void InitializeVisualComponents()
         {
             fieldsPanel = GetTemplateChild(PART_FieldsPanel) as RichReportDesignerFieldsPanel;
             editor = GetTemplateChild(PART_RichEdit) as XpfRichEditorControl;
-
-            dragDropManager.Install(fieldsPanel, editor);
         }
 
-        private void ConfigureEditor()
-        {
-            //if (_editor == null) return;
-        }
-
-        private void RegisterServices()
+        private void RegisterEditorServices()
         {
             Report?.CopyRequiredServices(editor);
         }
 
-        protected void SetEditorFocus()
-        {
-            if (editor == null)
-                return;
-
-            editor.FocusKeyCodeTextBox();
-        }
-
-        private T GetService<T>() where T : class
+        internal T GetService<T>() where T : class
         {
             return Report?.GetService<T>() ?? default;
-        }
-
-        public void Render(object dataSource)
-        {
-            //DataSource = dataSource;
-
-            //StreamSerializationHelper.DeserializeFromBytes(File.ReadAllBytes(@"D:\RenderTemplate.RichRpt"), s =>
-            //{
-            //    var temp = JsonSerializationHelper.DeserializeFromStream<RichReportTemplate>(s);
-            //    DocumentTemplate = temp;
-            //});
-
-            //Fields = RichDataFieldsReflectionBuilder.Default.BuildFromObject(DataSource);
-            //var temp = RichReportTemplateSerializationHelper.DeserializeFromFile(@"D:\RenderTemplate.RichRpt");
-            ////_editor.RegisterServices();
-            //DocumentTemplate = temp;
-
-            //var sb = FluentStringBuilder.CreateNew();
-
-            //foreach(var f in Fields)
-            //{
-            //    sb.AppendLine($"path : {f.Path} DataType : {f.DataType}");
-
-            //    foreach(var ff in f.Fields)
-            //    {
-            //        sb.AppendLine($"path : {ff.Path} DataType : {ff.DataType}");
-            //    }
-            //}
-
-            //RunTimeLogger.CurrentLogger.LogInfo(sb.ToString());
-
-            //_editor.RegisterServices();
-
-            //StreamSerializationHelper.DeserializeFromBytes(temp.Content, s =>
-            //{
-            //    _editor.LoadDocument(s, DocumentFormat.Docm);
-            //    _editor.RegisterServices();
-            //});
-
-
-            //RichDocumentTemplateProcessor processor = new();
-            //processor.LoadTemplate(temp.Content);
-            //processor.ExecuteMailMerge(DataSource);
-
-            //newTemp.Content = processor.GetRenderedTemplateContent();
-
-            //RichReportEngine engine = new();
-            //engine.Print(temp.Content, DataSource);
-
-            //var result = engine.ProcessAndRender(temp.Content);
-            //newTemp.Content = result;
-
-            //StreamSerializationHelper.DeserializeFromBytes(newTemp.Content, s =>
-            //{
-            //    _editor.LoadDocumentTemplate(s);
-            //});
-
-            //_editor.Document.Fields.Update();
-
-            //FieldManagementService fieldManagementService = new FieldManagementService();
-            //var count = fieldManagementService.ScanDocumentFields(_editor.Document).ToRowFormateString(x => x.FieldCode.BuildFieldCode());
-            //NotificationManagerHelper.ShowAlert($"{count}");
-
-            //var temps = new RichReportTemplate
-            //{
-            //    Content = null,
-            //    Thumbnail = null,
-            //    Data = StreamSerializationHelper.SerializeToString(s =>
-            //        {
-            //            _editor.SaveDocument(s, DocumentFormat.OpenXml);
-            //        })
-            //};
-
-
-            //StreamSerializationHelper.SerializeToFile(s =>
-            //{
-            //    _editor.SaveDocument(s, DocumentFormat.FlatOpcMacroEnabled);
-            //}, @"D:\FlatOpcMacroEnabled.RichRpt");
-
-            //StreamSerializationHelper.SerializeToFile(s =>
-            //{
-            //    _editor.SaveDocument(s, DocumentFormat.Rtf);
-            //}, @"D:\Rtf.RichRpt");
-
-            //StreamSerializationHelper.SerializeToFile(s =>
-            //{
-            //    _editor.SaveDocument(s, DocumentFormat.FlatOpcMacroEnabledTemplate);
-            //}, @"D:\FlatOpcMacroEnabledTemplate.RichRpt");
-
-            //StreamSerializationHelper.SerializeToFile(s =>
-            //{
-            //    _editor.SaveDocument(s, DocumentFormat.FlatOpc);
-            //}, @"D:\FlatOpc.RichRpt");
-
-            //StreamSerializationHelper.SerializeToFile(s =>
-            //{
-            //    _editor.SaveDocument(s, DocumentFormat.FlatOpcTemplate);
-            //}, @"D:\FlatOpcTemplate.RichRpt");
-
-            //RichReportTemplateSerializationHelper.SerializeToFile(temps, @"D:\RenderTemplate22.RichRpt");
         }
 
         //protected virtual void Dispose(bool disposing)
@@ -443,32 +312,6 @@ namespace ISoft.RichReportDesigner.UI.Controls
             SetValue(ActualCommandsPropertyKey, null);
         }
 
-        private void AttachToEditor()
-        {
-            editor.DoIfNotNull(editor=>
-            {
-                // Set up event handlers
-                editor.Loaded += Editor_Loaded;
-                editor.CalculateDocumentVariable += Editor_CalculateDocumentVariable;
-                editor.InitializeDocument += Editor_InitializeDocument; ;
-                editor.DocumentLoaded += Editor_DocumentLoaded;
-                editor.BeforePagePaint += Editor_BeforePagePaint;
-            });
-        }
-
-        private void DetachFromEditor()
-        {
-            editor.DoIfNotNull(editor=>
-            {
-                // Set up event handlers
-                editor.Loaded -= Editor_Loaded;
-                editor.CalculateDocumentVariable -= Editor_CalculateDocumentVariable;
-                editor.InitializeDocument -= Editor_InitializeDocument;
-                editor.DocumentLoaded -= Editor_DocumentLoaded;
-                editor.BeforePagePaint -= Editor_BeforePagePaint;
-            });
-        }
-
         private void OnException(Exception ex)
         {
             ex?.ShowExceptionMessage();
@@ -476,44 +319,43 @@ namespace ISoft.RichReportDesigner.UI.Controls
 
         #endregion
 
-        #region Editor Events Handelrs
+        //#region Editor Events Handelrs
 
-        private void Editor_Loaded(object sender, RoutedEventArgs e)
-        {
-            RegisterServices();
-            SetEditorFocus();
-        }
+        //private void Editor_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    SetEditorFocus();
+        //}
 
-        private void Editor_DocumentLoaded(object sender, EventArgs e)
-        {
-            Controller.Fields.HighlightsFields();
-        }
+        //private void Editor_DocumentLoaded(object sender, EventArgs e)
+        //{
+        //    Controller.Fields.HighlightsFields();
+        //}
 
-        private void Editor_InitializeDocument(object sender, EventArgs e)
-        {
-            editor.ConfigureDocumentDefaultProperties(FlowDirection.IsRightToLeft());
-        }
+        //private void Editor_InitializeDocument(object sender, EventArgs e)
+        //{
+        //    editor.ConfigureDocumentDefaultProperties(FlowDirection.IsRightToLeft());
+        //}
 
-        private void Editor_CalculateDocumentVariable(object sender, CalculateDocumentVariableEventArgs e)
-        {
-            GetService<IRichDocumentVariableManagerService>().DoIfNotNull(s =>
-            {
-                s.Calculate(e);
-            });
-        }
+        //private void Editor_CalculateDocumentVariable(object sender, CalculateDocumentVariableEventArgs e)
+        //{
+        //    GetService<IRichDocumentVariableManagerService>().DoIfNotNull(s =>
+        //    {
+        //        s.Calculate(e);
+        //    });
+        //}
 
-        // can called by _editor.Refresh()
-        private void Editor_BeforePagePaint(object sender, BeforePagePaintEventArgs e)
-        {
-            // Only apply custom drawing to the screen, not to the printer
-            if (e.CanvasOwnerType != CanvasOwnerType.Control || !IsReady)
-                return;
+        //// can called by _editor.Refresh()
+        //private void Editor_BeforePagePaint(object sender, BeforePagePaintEventArgs e)
+        //{
+        //    // Only apply custom drawing to the screen, not to the printer
+        //    if (e.CanvasOwnerType != CanvasOwnerType.Control || !IsReady)
+        //        return;
 
-            // Assign the custom painter
-            e.Painter = new PagePainter();
-        }
+        //    // Assign the custom painter
+        //    e.Painter = new PagePainter();
+        //}
 
-        #endregion
+        //#endregion
 
         #region Static Property Change Handlers
 
@@ -545,6 +387,8 @@ namespace ISoft.RichReportDesigner.UI.Controls
             IsLoading = true;
             try
             {
+                RegisterEditorServices();
+
                 DisplayFields.LoadFromSource(DisplayFieldsBuilder.Build(report));
 
                 report.DefaultTemplatesSource.LoadIfNotLoaded();
@@ -558,7 +402,7 @@ namespace ISoft.RichReportDesigner.UI.Controls
             }
         }
 
-        internal void LoadTemplateSource(IRichReportTemplate template)
+        private void LoadTemplateSource(IRichReportTemplate template)
         {
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -675,7 +519,7 @@ namespace ISoft.RichReportDesigner.UI.Controls
 
         bool IRichReportDesigner.IsInDesignTime => DesignerProperties.GetIsInDesignMode(this);
 
-        IRichEditorControl IRichEditControlOwner.Editor => editor;
+        IRichEditorControl IRichEditorControlOwner.Editor => editor;
 
         IRichReport IRichReportDesigner.Report => Report;
 
@@ -722,7 +566,7 @@ namespace ISoft.RichReportDesigner.UI.Controls
             });
         }
 
-        void IRichReportDesigner.ExecuteWithDispatcher(Action action, DispatcherPriority priority)
+        void IRichReportDesignerControl.ExecuteWithDispatcher(Action action, DispatcherPriority priority)
         {
             Dispatcher.BeginInvoke(action, priority);
         }

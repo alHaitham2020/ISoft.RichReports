@@ -1,0 +1,36 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <!--
+    DevExpress packages are NOT committed. Restore them from your licensed feed
+    (add the feed to NuGet.config / Visual Studio package sources).
+    "23.2.*" floats to the newest installed 23.2 patch; pin an exact version
+    (for example 23.2.5) once you have chosen it, so every machine restores the same build.
+  -->
+  <ItemGroup Label="DevExpress">
+    <PackageVersion Include="DevExpress.Document.Processor" Version="23.2.*" />
+    <PackageVersion Include="DevExpress.Wpf.Core" Version="23.2.*" />
+    <PackageVersion Include="DevExpress.Wpf.RichEdit" Version="23.2.*" />
+  </ItemGroup>
+
+  <ItemGroup Label="Microsoft.Extensions">
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup Label="Data">
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
+
+  <ItemGroup Label="Testing">
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageVersion Include="xunit" Version="2.9.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+</Project>

@@ -9,7 +9,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
 
         public RichFieldOptionsBase InnerFieldOptions { get; set; }
 
-        public override RichFieldType FieldType => throw new System.NotImplementedException();
+        public override RichEditFieldType FieldType => throw new System.NotImplementedException();
 
         public static RichNestedFieldOptions CreateIncludePictureWithInnerOptions(RichFieldOptionsBase innerFieldsOptions)
         {

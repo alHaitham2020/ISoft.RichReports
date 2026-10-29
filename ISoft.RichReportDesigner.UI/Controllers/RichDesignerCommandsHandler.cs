@@ -157,6 +157,8 @@ namespace ISoft.RichReportDesigner.UI.Controllers
         {
             try
             {
+                if (!CanExport()) return;
+
                 var isExported = _templateController.ExecuteWithTemplate(Report.TemplateStorage.Export);
                 if (isExported)
                 {
@@ -178,6 +180,8 @@ namespace ISoft.RichReportDesigner.UI.Controllers
         {
             try
             {
+                if (!CanImport()) return;
+
                 if (!RichReportTemplateImportExportHelper.TryShowImportDialog(out var template))
                 {
                     return;

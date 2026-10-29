@@ -175,7 +175,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         private static readonly Func<IRichDisplayFieldGroup, string> Selector = static x => x.Path;
 
         // Lazy caches — rebuilt on demand after mutations
-        private FrozenDictionary<RichFieldKey, IRichDisplayField> _allFields;
+        private FrozenDictionary<RichEditFieldKey, IRichDisplayField> _allFields;
         private FrozenDictionary<string, IRichDisplayField> _fieldsByPath;
         private bool _cacheValid;
 
@@ -195,7 +195,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
             if (_cacheValid) return;
 
             // Build all three lookups in a single pass where possible
-            var allFields = new Dictionary<RichFieldKey, IRichDisplayField>();
+            var allFields = new Dictionary<RichEditFieldKey, IRichDisplayField>();
             var fieldsByPath = new Dictionary<string, IRichDisplayField>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var group in Values)
@@ -239,7 +239,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
             return _fieldsByPath!.TryGetValue(fieldPath, out var field) ? field : null;
         }
 
-        public IRichDisplayField FindFieldByKey(RichFieldKey fieldKey)
+        public IRichDisplayField FindFieldByKey(RichEditFieldKey fieldKey)
         {
             if(!fieldKey.IsValid()) return null;
 
@@ -248,14 +248,14 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
             return _allFields!.TryGetValue(fieldKey, out var field) ? field : null;
         }
 
-        public IRichDisplayField FindNoneDataFieldByKey(RichFieldKey fieldKey)
+        public IRichDisplayField FindNoneDataFieldByKey(RichEditFieldKey fieldKey)
             => FindFieldByKeyInCategory(fieldKey, RichDisplayFieldGroupCategory.DataFields, negate: true);
 
-        public IRichDisplayField FindDataFieldByKey(RichFieldKey fieldKey)
+        public IRichDisplayField FindDataFieldByKey(RichEditFieldKey fieldKey)
             => FindFieldByKeyInCategory(fieldKey, RichDisplayFieldGroupCategory.DataFields, negate: false);
 
         private IRichDisplayField FindFieldByKeyInCategory(
-            RichFieldKey fieldKey,
+            RichEditFieldKey fieldKey,
             RichDisplayFieldGroupCategory category,
             bool negate)
         {
@@ -277,12 +277,12 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
             EnsureCache();
 
             return _fieldsByPath!.TryGetValue(fieldPath, out var field)
-                   && field.FieldType == RichFieldType.MergeField
+                   && field.FieldType == RichEditFieldType.MergeField
                 ? field
                 : null;
         }
 
-        public IRichDisplayFieldGroup FindGroupContainingField(RichFieldKey fieldKey)
+        public IRichDisplayFieldGroup FindGroupContainingField(RichEditFieldKey fieldKey)
         {
             if (!fieldKey.IsValid()) return null;
 

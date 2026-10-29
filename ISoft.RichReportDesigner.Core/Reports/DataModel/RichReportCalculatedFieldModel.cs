@@ -63,6 +63,8 @@ namespace ISoft.RichReportDesigner.Core.Reports.DataModel
             }
         }
 
+        public bool IsDetail => !string.IsNullOrWhiteSpace(DataMember);
+
         public RichReportCalculatedFieldModel(IRichReportCalculatedFieldInfo info)
         {
             ArgumentGuardHelper.ArgumentNotNull(info, nameof(info));

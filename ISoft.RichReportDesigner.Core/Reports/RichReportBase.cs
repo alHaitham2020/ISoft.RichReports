@@ -1,6 +1,6 @@
 ﻿using DevExpress.XtraPrinting;
 using DevExpress.XtraRichEdit.Model;
-using ISoft.Printing.Core.Data;
+using ISoft.Printing.Shared.Data;
 using ISoft.RichReportDesigner.Core.Data;
 using ISoft.RichReportDesigner.Core.Fields.Core;
 using ISoft.RichReportDesigner.Core.Fields.Data;
@@ -84,7 +84,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
 
         IReportInfo IRichReport.ReportInfo => _context.ReportInfo;
 
-        IRichDataSource IRichReport.DataSource => _context.DataSource;
+        IRichReportDataSource IRichReport.DataSource => _context.DataSource;
 
         IRichReportTemplateStorage IRichReport.TemplateStorage => _context.TemplateStorage;
 
@@ -121,7 +121,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
             targetContainer.InheritService<IRichDocumentPropertiesManagerService>(this);
             targetContainer.InheritService<IRichDocumentCustomPropertiesManagerService>(this);
             targetContainer.InheritService<IRichCalculatedFieldManagerService>(this);
-            targetContainer.InheritService<IRichUriStreamProviderManagerService>(this);
+            targetContainer.InheritService<IRichUriStreamRegistrationService>(this);
 
             targetContainer.InheritService<IRichEditFieldsManagerService>(this);
 
@@ -233,7 +233,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
             AddService(typeof(IRichDocumentRenderingService), new RichDocumentRenderingService(fieldManagerService));
             AddService(typeof(IMailMergeExecutionService), new MailMergeExecutionService());
             AddService(typeof(IRichPrintingService), new RichPrintingService());
-            AddService(typeof(IRichUriStreamProviderManagerService), new RichUriStreamProviderManagerService());
+            AddService(typeof(IRichUriStreamRegistrationService), new RichUriStreamProviderManagerService());
         }
 
         internal protected virtual ServiceManager CreateServiceManager()

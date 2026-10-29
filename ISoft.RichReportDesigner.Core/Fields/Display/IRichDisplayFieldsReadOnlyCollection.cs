@@ -5,15 +5,15 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
 {
     public interface IRichDisplayFieldsReadOnlyCollection : IReadOnlyCollection<IRichDisplayField>
     {
-        IRichDisplayField this[RichFieldKey key] { get; }
+        IRichDisplayField this[RichEditFieldKey key] { get; }
 
-        IEnumerable<RichFieldKey> FieldKeys { get; }
+        IEnumerable<RichEditFieldKey> FieldKeys { get; }
 
-        bool ContainsField(RichFieldKey key);
+        bool ContainsField(RichEditFieldKey key);
         IRichDisplayField FindByFieldProperty(string fieldProperty);
-        IRichDisplayField GetFieldByKey(RichFieldKey key);
+        IRichDisplayField GetFieldByKey(RichEditFieldKey key);
 
-        bool TryGetField(RichFieldKey key, out IRichDisplayField item);
+        bool TryGetField(RichEditFieldKey key, out IRichDisplayField item);
     }
 
 }

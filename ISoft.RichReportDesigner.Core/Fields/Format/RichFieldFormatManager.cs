@@ -167,13 +167,13 @@ namespace ISoft.RichReportDesigner.Core.Fields.Format
             return null;
         }
 
-        public RichSwitchType GetSwitchType(string switchCode)
+        public RichSwitchType GetSwitchType(string switchKey)
         {
-            if (string.IsNullOrEmpty(switchCode))
+            if (string.IsNullOrEmpty(switchKey))
                 return RichSwitchType.None;
 
             // Check cache first
-            if (_formatCache.TryGetValue(switchCode, out var cachedFormat))
+            if (_formatCache.TryGetValue(switchKey, out var cachedFormat))
             {
                 return cachedFormat.FormatType switch
                 {
@@ -188,7 +188,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Format
             foreach (var provider in _providers.Values)
             {
                 var allFormats = provider.GetAllFormats();
-                if (allFormats.Any(f => f.Value == switchCode))
+                if (allFormats.Any(f => f.Value == switchKey))
                 {
                     return provider.FormatType switch
                     {

@@ -1,7 +1,7 @@
 ﻿namespace ISoft.RichReportDesigner.Core.Fields.Argumentes
 {
     /// <summary>
-    /// Represents an argument's position in the originassl string.
+    /// Represents an argument's position in the original string.
     /// </summary>
     public class ArgumentPosition
     {

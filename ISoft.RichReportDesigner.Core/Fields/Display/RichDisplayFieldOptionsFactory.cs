@@ -20,32 +20,32 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         // Read-only registry: populated once in the static ctor, never mutated.
         // Using IReadOnlyDictionary exposes intent and prevents accidental writes.
         // ---------------------------------------------------------------------
-        private static readonly IReadOnlyDictionary<RichFieldType, Func<IRichDisplayField, RichFieldOptionsBase>> _factoryCache;
+        private static readonly IReadOnlyDictionary<RichEditFieldType, Func<IRichDisplayField, RichFieldOptionsBase>> _factoryCache;
 
         static RichDisplayFieldOptionsFactory()
         {
             // Pre-size the dictionary with the known number of registrations to
             // avoid internal resize/rehash during static initialization.
-            var cache = new Dictionary<RichFieldType, Func<IRichDisplayField, RichFieldOptionsBase>>(capacity: 16)
+            var cache = new Dictionary<RichEditFieldType, Func<IRichDisplayField, RichFieldOptionsBase>>(capacity: 16)
             {
                 // Simple one-liner mappings.
-                [RichFieldType.MergeField] = f => RichMergeFieldOptions.Create(f.FieldProperty, f.FieldFormat),
-                [RichFieldType.DocPropertyField] = f => RichDocPropertyFieldOptions.Create(f.FieldProperty, f.FieldFormat),
-                [RichFieldType.DocVariableField] = f => RichDocVariableFieldOptions.Create(f.FieldProperty, f.FieldFormat),
-                [RichFieldType.CustomPropertyField] = f => RichDocCustomPropertyFieldOptions.Create(f.FieldProperty, f.FieldFormat),
-                [RichFieldType.ExpEditCalculatedField] = f => RichExpressionEditorCalculatedFieldOptions.Create(f.FieldProperty, f.FieldFormat),
-                [RichFieldType.IncludePictureField] = f => RichIncludePictureFieldOptions.Create(f.FieldProperty),
-                [RichFieldType.HyperlinkField] = f => RichHyperlinkFieldOptions.Create(f.FieldProperty, f.FieldFormat),
+                [RichEditFieldType.MergeField] = f => RichMergeFieldOptions.Create(f.FieldProperty, f.FieldFormat),
+                [RichEditFieldType.DocPropertyField] = f => RichDocPropertyFieldOptions.Create(f.FieldProperty, f.FieldFormat),
+                [RichEditFieldType.DocVariableField] = f => RichDocVariableFieldOptions.Create(f.FieldProperty, f.FieldFormat),
+                [RichEditFieldType.CustomPropertyField] = f => RichDocCustomPropertyFieldOptions.Create(f.FieldProperty, f.FieldFormat),
+                [RichEditFieldType.ExpEditCalculatedField] = f => RichExpressionEditorCalculatedFieldOptions.Create(f.FieldProperty, f.FieldFormat),
+                [RichEditFieldType.IncludePictureField] = f => RichIncludePictureFieldOptions.Create(f.FieldProperty),
+                [RichEditFieldType.HyperlinkField] = f => RichHyperlinkFieldOptions.Create(f.FieldProperty, f.FieldFormat),
 
                 // Field types sharing the same creator are grouped for clarity.
-                [RichFieldType.DateField] = CreateDateFieldOptions,
-                [RichFieldType.CreateDateField] = CreateDateFieldOptions,
-                [RichFieldType.SaveDateField] = CreateDateFieldOptions,
+                [RichEditFieldType.DateField] = CreateDateFieldOptions,
+                [RichEditFieldType.CreateDateField] = CreateDateFieldOptions,
+                [RichEditFieldType.SaveDateField] = CreateDateFieldOptions,
 
-                [RichFieldType.TimeField] = CreateFormatableFieldOptions,
-                [RichFieldType.PrintDateField] = CreateFormatableFieldOptions,
-                [RichFieldType.PageField] = CreateFormatableFieldOptions,
-                [RichFieldType.NumPagesField] = CreateFormatableFieldOptions,
+                [RichEditFieldType.TimeField] = CreateFormatableFieldOptions,
+                [RichEditFieldType.PrintDateField] = CreateFormatableFieldOptions,
+                [RichEditFieldType.PageField] = CreateFormatableFieldOptions,
+                [RichEditFieldType.NumPagesField] = CreateFormatableFieldOptions,
             };
 
             _factoryCache = cache;
@@ -73,8 +73,8 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         /// the "first registration wins" behaviour.
         /// </remarks>
         private static void Register(
-            IDictionary<RichFieldType, Func<IRichDisplayField, RichFieldOptionsBase>> cache,
-            RichFieldType fieldType,
+            IDictionary<RichEditFieldType, Func<IRichDisplayField, RichFieldOptionsBase>> cache,
+            RichEditFieldType fieldType,
             Func<IRichDisplayField, RichFieldOptionsBase> creator)
         {
             // ArgumentGuardHelper is assumed to be the project's standard guard.

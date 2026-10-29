@@ -5,12 +5,12 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Fields
 {
     public interface IRichEditFieldDisplayNameProvider
     {
-        string GetDisplayName(RichFieldType fieldType);
+        string GetDisplayName(RichEditFieldType fieldType);
     }
 
     public class RichEditFieldDisplayNameProvider : IRichEditFieldDisplayNameProvider
     {
-        public string GetDisplayName(RichFieldType fieldType)
+        public string GetDisplayName(RichEditFieldType fieldType)
         {
             return RichFieldTypeNamesLocalizer.Get(fieldType);
         }

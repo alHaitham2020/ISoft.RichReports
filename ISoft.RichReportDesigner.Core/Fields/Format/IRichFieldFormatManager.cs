@@ -25,6 +25,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Format
         void RegisterProvider(IRichFieldFormatProvider provider);
 
         bool HasProvider(RichFieldFormatType formatType);
+
         bool HasDefaultFormatValue(Type dataType);
     }
 }

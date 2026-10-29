@@ -47,7 +47,7 @@ namespace ISoft.RichReportDesigner.UI.DataModel
             {
                 return _designerTemplate;
             }
-            protected set
+            private set
             {
                 _designerTemplate = value;
             }

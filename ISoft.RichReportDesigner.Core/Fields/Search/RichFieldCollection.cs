@@ -4,6 +4,13 @@ using System.Collections.Generic;
 
 namespace ISoft.RichReportDesigner.Core.Fields.Search
 {
+    public interface IRichDocField
+    {
+        SubDocumentType DocumentType { get; }
+
+        Field Field { get; }
+    }
+
     public interface IRichFieldCollection : IReadOnlyDataCollection<IRichDocField>
     {
 

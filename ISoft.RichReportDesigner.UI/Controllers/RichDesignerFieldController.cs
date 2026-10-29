@@ -81,8 +81,7 @@ namespace ISoft.RichReportDesigner.UI.Controllers
         {
             //if (HighlightingEnabled) return;
 
-            _designer.Editor.BeginUpdate();
-            try
+            Document.ExecuteOperation(doc =>
             {
                 foreach (var result in FieldManagerService.FindAllDocumentFields(Document))
                 {
@@ -91,21 +90,16 @@ namespace ISoft.RichReportDesigner.UI.Controllers
 
                     ClearFieldHighlight(result.Field, display.BackgroundColor);
                 }
-            }
-            finally
-            {
-                _designer.Editor.EndUpdate();
-            }
+            });
         }
 
         public void HighlightsFields()
         {
             if (!HighlightingEnabled) return;
 
-            _designer.Editor.BeginUpdate();
-            try
+            Document.ExecuteOperation(doc =>
             {
-                foreach (var result in FieldManagerService.FindAllDocumentFields(Document))
+                foreach (var result in FieldManagerService.FindAllDocumentFields(doc))
                 {
                     result.Field.Update();
 
@@ -114,11 +108,7 @@ namespace ISoft.RichReportDesigner.UI.Controllers
 
                     SetFieldHighlight(result.Field, display.BackgroundColor);
                 }
-            }
-            finally
-            {
-                _designer.Editor.EndUpdate();
-            }
+            });
         }
 
         public void RefreshHighlightsFields()
@@ -137,21 +127,16 @@ namespace ISoft.RichReportDesigner.UI.Controllers
         {
             if (displayField == null) return;
 
-            _designer.Editor.BeginUpdate();
-            try
+            Document.ExecuteOperation(doc =>
             {
-                var matches = FieldManagerService.FindDocumentFields(Document, c => c.FieldKey == displayField.FieldKey);
+                var matches = FieldManagerService.FindDocumentFields(doc, c => c.FieldKey == displayField.FieldKey);
 
                 foreach (var result in matches)
                 {
                     result.Field.Update();
                     SetFieldHighlight(result.Field, displayField.BackgroundColor);
                 }
-            }
-            finally
-            {
-                _designer.Editor.EndUpdate();
-            }
+            });
         }
 
         #endregion
@@ -273,22 +258,26 @@ namespace ISoft.RichReportDesigner.UI.Controllers
                 ? position
                 : ResolvePositionAroundExisting(existing, position);
 
-            // 2. Create the field.
-            var field = CreateField(target, displayField)
-                ?? throw new InvalidOperationException(
-                    $"Failed to create a document field of type {displayField.FieldType}.");
-
-            // 3. Surround with spaces and refresh.
-            var endRange = field.Range.WithSubDocument(d =>
+            // must execute in block
+            Document.ExecuteOperation(doc =>
             {
-                d.InsertSingleLineText(field.Range.Start, " ");
-                return d.InsertSingleLineText(field.Range.End, " ");
+                // 2. Create the field.
+                var field = CreateField(target, displayField)
+                    ?? throw new InvalidOperationException(
+                        $"Failed to create a document field of type {displayField.FieldType}.");
+
+                // 3. Surround with spaces and refresh.
+                var endRange = field.Range.WithSubDocument(d =>
+                {
+                    d.InsertSingleLineText(field.Range.Start, " ");
+                    return d.InsertSingleLineText(field.Range.End, " ");
+                });
+
+                field.Update();
+                SetFieldHighlight(field, displayField.BackgroundColor);
+
+                doc.CaretPosition = endRange.End;
             });
-
-            field.Update();
-            SetFieldHighlight(field, displayField.BackgroundColor);
-
-            Document.CaretPosition = endRange.End;
         }
 
         /// <summary>

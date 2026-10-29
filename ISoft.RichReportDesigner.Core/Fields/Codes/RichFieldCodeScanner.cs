@@ -57,7 +57,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
         static RichFieldCodeScanner()
         {
             // Build field code pattern
-            var fieldTypes = RichFieldInfoProvider.GetAllFieldsName();
+            var fieldTypes = RichEditFieldInfoProvider.GetAllFieldsName();
             var pattern = string.Format(
                 FIELD_TYPE_PATTERN_TEMPLATE,
                 string.Join("|", fieldTypes.Select(Regex.Escape)));
@@ -126,7 +126,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
 
             if (!match.Success)
             {
-                return new RichFieldCode(RichFieldInfo.Unknown)
+                return new RichFieldCode(RichEditFieldInfo.Unknown)
                 {
                     OriginalCode = code
                 };
@@ -155,7 +155,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
             if (string.IsNullOrWhiteSpace(parameters))
                 return;
 
-            // Parse switches
+            // Parse switches ( its important to parse switches first then arguments)
             _switchScanner.ScanSwitches(fieldCode.Switches, parameters);
 
             var cleanedParameters = _switchScanner.RemoveSwitches(parameters);

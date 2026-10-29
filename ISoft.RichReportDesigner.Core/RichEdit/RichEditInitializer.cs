@@ -32,15 +32,15 @@ namespace ISoft.RichReportDesigner.Core.RichEdit
                 var fieldTypes = GetFieldTypes();
                 if (fieldTypes is null) return;
 
-                Register(fieldTypes, MergefieldField.FieldType, RichMergeField.Create);
-                Register(fieldTypes, DateField.FieldType, RichDateField.Create);
-                Register(fieldTypes, TimeField.FieldType, RichTimeField.Create);
-                Register(fieldTypes, PrintDateField.FieldType, RichPrintDateField.Create);
-                Register(fieldTypes, IncludepictureField.FieldType, RichIncludePictureField.Create);
-                Register(fieldTypes, PageField.FieldType, RichPageField.Create);
-                Register(fieldTypes, NumPagesField.FieldType, RichNumPagesField.Create);
-                Register(fieldTypes, DocumentPropertyField.FieldType, RichDocumentPropertyField.Create);
-                Register(fieldTypes, DocVariableField.FieldType, RichDocVariableField.Create);
+                Register(fieldTypes, MergefieldField.FieldType, RichEditMergeField.Create);
+                Register(fieldTypes, DateField.FieldType, RichEditDateField.Create);
+                Register(fieldTypes, TimeField.FieldType, RichEditTimeField.Create);
+                Register(fieldTypes, PrintDateField.FieldType, RichEditPrintDateField.Create);
+                Register(fieldTypes, IncludepictureField.FieldType, RichEditIncludePictureField.Create);
+                Register(fieldTypes, PageField.FieldType, RichEditPageField.Create);
+                Register(fieldTypes, NumPagesField.FieldType, RichEditNumPagesField.Create);
+                Register(fieldTypes, DocumentPropertyField.FieldType, RichEditDocumentPropertyField.Create);
+                Register(fieldTypes, DocVariableField.FieldType, RichEditDocVariableField.Create);
 
                 _initialized = true;
             }

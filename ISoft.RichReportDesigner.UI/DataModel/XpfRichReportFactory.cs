@@ -1,4 +1,5 @@
 ﻿using ISoft.Printing.Core.Data;
+using ISoft.Printing.Shared.Data;
 using ISoft.RichReportDesigner.Core.Data;
 using ISoft.RichReportDesigner.Core.Reports;
 using ISoft.RichReportDesigner.Core.Templates.FileSystem;
@@ -25,7 +26,7 @@ namespace ISoft.RichReportDesigner.UI.DataModel
         /// </summary>
         public static IXpfRichReport CreateReport(
             IReportInfo reportInfo,
-            IRichDataSource dataSource,
+            IRichReportDataSource dataSource,
             IRichReportTemplateStorage storageService,
             IRichReportPrintPermissionInfo permissionService,
             IRichReportProperties properties,
@@ -51,7 +52,7 @@ namespace ISoft.RichReportDesigner.UI.DataModel
         /// </summary>
         public static IXpfRichReport CreateReport(
             IReportInfo reportInfo,
-            IRichDataSource dataSource,
+            IRichReportDataSource dataSource,
             IRichReportTemplateService templateService,
             IRichReportTemplateInfoProvider templateProvider,
             IRichReportPrintPermissionInfo permissionService,
@@ -76,7 +77,7 @@ namespace ISoft.RichReportDesigner.UI.DataModel
         /// </summary>
         public static IXpfRichReport CreateReport(
             IReportInfo reportInfo,
-            IRichDataSource dataSource,
+            IRichReportDataSource dataSource,
             IRichReportTemplateService templateService,
             IRichDefaultTemplateInfoProvider defaultTemplateInfoProvider,
             IRichReportTemplateInfoProvider templateProvider,

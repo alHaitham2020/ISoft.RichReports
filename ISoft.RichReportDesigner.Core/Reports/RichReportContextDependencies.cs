@@ -1,4 +1,4 @@
-﻿using ISoft.Printing.Core.Data;
+﻿using ISoft.Printing.Shared.Data;
 using ISoft.RichReportDesigner.Core.Data;
 using ISoft.RichReportDesigner.Core.RichEdit.Properties;
 
@@ -8,7 +8,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
     {
         public IReportInfo ReportInfo { get; set; }
 
-        public IRichDataSource DataSource { get; set; }
+        public IRichReportDataSource DataSource { get; set; }
 
         public IRichReportTemplateStorage TemplateStorage { get; set; }
 

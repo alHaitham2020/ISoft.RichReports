@@ -98,11 +98,11 @@ namespace ISoft.RichReportDesigner.Core.Designer
                 groupCategory: RichDisplayFieldGroupCategory.SystemFields,
                 parentGroup: null);
             
-            TryAddSystemField(RichFieldType.PageField, group, provider);
-            TryAddSystemField(RichFieldType.NumPagesField, group, provider);
-            TryAddSystemField(RichFieldType.DateField, group, provider);
-            TryAddSystemField(RichFieldType.TimeField, group, provider);
-            TryAddSystemField(RichFieldType.PrintDateField, group, provider);
+            TryAddSystemField(RichEditFieldType.PageField, group, provider);
+            TryAddSystemField(RichEditFieldType.NumPagesField, group, provider);
+            TryAddSystemField(RichEditFieldType.DateField, group, provider);
+            TryAddSystemField(RichEditFieldType.TimeField, group, provider);
+            TryAddSystemField(RichEditFieldType.PrintDateField, group, provider);
 
             return group;
         }
@@ -195,7 +195,7 @@ namespace ISoft.RichReportDesigner.Core.Designer
             return groups;
         }
 
-        protected void TryAddSystemField(RichFieldType fieldType, RichDisplayFieldGroup group, IRichEditFieldsManagerService service)
+        protected void TryAddSystemField(RichEditFieldType fieldType, RichDisplayFieldGroup group, IRichEditFieldsManagerService service)
         {
             if (!service.TryGetFieldInfo(fieldType, out var fieldInfo))
             {

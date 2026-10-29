@@ -1,4 +1,4 @@
-﻿using ISoft.Printing.Core.Data;
+﻿using ISoft.Printing.Shared.Data;
 using ISoft.RichReportDesigner.Core.Data;
 using ISoft.RichReportDesigner.Core.RichEdit.Properties;
 
@@ -10,7 +10,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
 
         IRichReportContextBuilder WithReportInfo(IReportInfo reportInfo);
 
-        IRichReportContextBuilder WithDataSource(IRichDataSource dataSource);
+        IRichReportContextBuilder WithDataSource(IRichReportDataSource dataSource);
 
         IRichReportContextBuilder WithDefaultTemplateInfoProvider(IRichDefaultTemplateInfoProvider provider);
 
@@ -27,6 +27,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
         IRichReportContextBuilder WithDocumentProperties(IRichDocumentProperties documentProperties);
 
         IRichReportContextBuilder WithVariableProperties(IRichDocumentVariablesProperties variableProperties);
+
         IRichReportContextBuilder WithCalculatedFieldInfoProvider(IRichReportCalculatedFieldInfoProvider provider);
     }
 }

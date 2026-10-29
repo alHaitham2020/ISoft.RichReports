@@ -1,5 +1,4 @@
 ﻿using DevExpress.Data;
-using DevExpress.Data.Access;
 using DevExpress.Data.Filtering;
 using DevExpress.Data.Filtering.Helpers;
 using DevExpress.XtraRichEdit.Native;
@@ -22,6 +21,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Data
             calculatedFieldManagerService = fieldManagerService;
         }
 
+        #region Actions
         public static RichDataControllerAdapter CreateDefault(IRichCalculatedFieldManagerService fieldManagerService)
         {
             return new RichDataControllerAdapter(RichEditDataController.CreateDefault(),fieldManagerService);
@@ -77,6 +77,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Data
 
             return evaluator.Evaluate(rowIndex);
         }
+        #endregion
 
         #region IDataControllerData
         UnboundColumnInfoCollection IDataControllerData.GetUnboundColumns()

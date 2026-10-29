@@ -12,6 +12,7 @@ namespace ISoft.RichReportDesigner.UI.ViewModel
         public virtual IXpfRichReport Report { get; protected set; }
 
         private IRichReportDesignerControlService DesignerService => this.GetLocalRequiredService<IRichReportDesignerControlService>();
+
         #endregion
 
         public RichReportDesignerDocumentViewModel(IXpfRichReport report)
@@ -20,10 +21,12 @@ namespace ISoft.RichReportDesigner.UI.ViewModel
         }
 
         #region Ovverieds
+
         protected override bool TryClosing()
         {
             return base.TryClosing() && CanCloseTemplate();
         }
+
         #endregion
 
         protected bool CanCloseTemplate() =>

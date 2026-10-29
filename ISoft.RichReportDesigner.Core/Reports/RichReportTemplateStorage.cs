@@ -1,6 +1,6 @@
 ﻿using ISoft.Mvvm.Extentions;
-using ISoft.Printing.Core.Data;
 using ISoft.Printing.Core.Xpf.BandDesigner;
+using ISoft.Printing.Shared.Data;
 using ISoft.RichReportDesigner.Core.Templates;
 using ISoft.Utils.Data.AsyncData;
 using ISoft.Utils.Helpers;

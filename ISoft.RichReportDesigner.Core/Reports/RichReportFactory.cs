@@ -1,4 +1,4 @@
-﻿using ISoft.Printing.Core.Data;
+﻿using ISoft.Printing.Shared.Data;
 using ISoft.RichReportDesigner.Core.Data;
 using ISoft.RichReportDesigner.Core.Templates.FileSystem;
 
@@ -26,7 +26,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
 
         public static IRichReport CreateReport(
             IReportInfo reportInfo,
-            IRichDataSource dataSource,
+            IRichReportDataSource dataSource,
             IRichReportTemplateStorage storageService,
             IRichDefaultTemplateInfoProvider defaultTemplateInfoProvider,
             IRichReportTemplateInfoProvider templateProvider,
@@ -47,7 +47,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
 
         public static IRichReport CreateReport(
             IReportInfo reportInfo,
-            IRichDataSource dataSource,
+            IRichReportDataSource dataSource,
             IRichReportTemplateService templateService,
             IRichReportTemplateInfoProvider templateProvider,
             IRichReportPrintPermissionInfo permissionService,
@@ -70,7 +70,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
         /// </summary>
         public static IRichReport CreateReport(
             IReportInfo reportInfo,
-            IRichDataSource dataSource,
+            IRichReportDataSource dataSource,
             IRichReportTemplateService templateService,
             IRichDefaultTemplateInfoProvider defaultTemplateInfoProvider,
             IRichReportTemplateInfoProvider templateProvider,

@@ -13,21 +13,21 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
     public class RichFieldCode : ObjectBase, IRichFieldCode
     {
         #region Fields
-        private readonly RichFieldInfo _fieldInfo;
+        private readonly RichEditFieldInfo _fieldInfo;
         private readonly RichFieldSwitchCollection _switches;
         private readonly RichFieldArgumentCollection _arguments;
         #endregion
 
         #region Proprties
-        public RichFieldInfo FieldInfo => _fieldInfo;
+        public RichEditFieldInfo FieldInfo => _fieldInfo;
 
-        public RichFieldType FieldType => FieldInfo.FieldType;
+        public RichEditFieldType FieldType => FieldInfo.FieldType;
 
         public string FieldName => FieldInfo.FieldName;
 
         public string FieldProperty => Arguments.GetFirstValue();
 
-        public RichFieldKey FieldKey => RichFieldKey.CreateFromInfo(FieldInfo, FieldProperty);
+        public RichEditFieldKey FieldKey => RichEditFieldKey.CreateFromInfo(FieldInfo, FieldProperty);
 
         public string OriginalCode { get; set; }
 
@@ -35,18 +35,18 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
 
         public IRichFieldSwitchCollection Switches => _switches;
 
-        public bool IsTableStart => FieldType == RichFieldType.MergeField && OriginalCode != null && OriginalCode.Contains(TableRegionsName.TableStart);
+        public bool IsTableStart => FieldType == RichEditFieldType.MergeField && OriginalCode != null && OriginalCode.Contains(TableRegionsName.TableStart);
 
-        public bool IsTableEnd => FieldType == RichFieldType.MergeField && OriginalCode != null && OriginalCode.Contains(TableRegionsName.TableEnd);
+        public bool IsTableEnd => FieldType == RichEditFieldType.MergeField && OriginalCode != null && OriginalCode.Contains(TableRegionsName.TableEnd);
 
         public bool IsRegion => IsTableStart || IsTableEnd;
 
         // for mail merge
-        public bool IsDataTableField => FieldType == RichFieldType.MergeField && !IsRegion && (FieldProperty?.Contains('.') ?? false);
+        public bool IsDataTableField => FieldType == RichEditFieldType.MergeField && !IsRegion && (FieldProperty?.Contains('.') ?? false);
         #endregion
 
         #region Constructrors
-        public RichFieldCode(RichFieldInfo fieldInfo)
+        public RichFieldCode(RichEditFieldInfo fieldInfo)
         {
             _fieldInfo = fieldInfo;
             _switches = new();
@@ -54,20 +54,20 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
         }
 
         public RichFieldCode(string fieldName) 
-            : this(RichFieldInfoProvider.GetFieldInfoOrEmpty(fieldName))
+            : this(RichEditFieldInfoProvider.GetFieldInfoOrEmpty(fieldName))
         {
           
         }
 
-        public RichFieldCode(RichFieldType fieldType)
-           : this(RichFieldInfoProvider.GetFieldInfoByTypeOrEmpty(fieldType))
+        public RichFieldCode(RichEditFieldType fieldType)
+           : this(RichEditFieldInfoProvider.GetFieldInfoByTypeOrEmpty(fieldType))
         {
 
         }
 
         public static RichFieldCode CreateEmpty()
         {
-            return new RichFieldCode(RichFieldInfo.Unknown);
+            return new RichFieldCode(RichEditFieldInfo.Unknown);
         }
 
         #endregion
@@ -114,7 +114,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
         {
             var property = FieldProperty;
 
-            if (FieldType != RichFieldType.MergeField || string.IsNullOrEmpty(property) || IsRegion)
+            if (FieldType != RichEditFieldType.MergeField || string.IsNullOrEmpty(property) || IsRegion)
             {
                 return string.Empty;
             }

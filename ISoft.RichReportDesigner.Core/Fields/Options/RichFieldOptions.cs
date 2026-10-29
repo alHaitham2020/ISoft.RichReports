@@ -7,16 +7,16 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
     /// </summary>
     public class RichFieldOptions : RichFieldOptionsBase
     {
-        private readonly RichFieldType _fieldType;
+        private readonly RichEditFieldType _fieldType;
 
-        public override RichFieldType FieldType => _fieldType;
+        public override RichEditFieldType FieldType => _fieldType;
 
-        public RichFieldOptions(RichFieldType fieldType)
+        public RichFieldOptions(RichEditFieldType fieldType)
         {
             _fieldType = fieldType;
         }
 
-        public static RichFieldOptions Create(RichFieldType fieldType)
+        public static RichFieldOptions Create(RichEditFieldType fieldType)
         {
             return new RichFieldOptions(fieldType);
         }

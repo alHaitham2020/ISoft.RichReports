@@ -8,7 +8,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
     /// </summary>
     public class RichIfFieldOptions : RichFieldOptionsBase
     {
-        public override RichFieldType FieldType => RichFieldType.IfField;
+        public override RichEditFieldType FieldType => RichEditFieldType.IfField;
 
         [RichFieldArgument(0)]
         public string Expression1 { get; set; }

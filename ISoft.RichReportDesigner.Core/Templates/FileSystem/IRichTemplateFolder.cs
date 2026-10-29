@@ -14,8 +14,6 @@ namespace ISoft.RichReportDesigner.Core.Templates.FileSystem
 
         int FileCount { get; }
 
-        IEnumerable<IRichTemplateFile> Files { get; }
-
         string FullPath { get; }
 
         bool IsLoaded { get; }
@@ -25,6 +23,8 @@ namespace ISoft.RichReportDesigner.Core.Templates.FileSystem
         string Name { get; }
 
         string ReportId { get; }
+
+        IEnumerable<IRichTemplateFile> Files { get; }
 
         IRichTemplateFile AddFile(string fileName);
 

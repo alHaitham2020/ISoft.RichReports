@@ -12,12 +12,12 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
         [RichFieldArgument(0)]
         public string FirstArgument { get; set; }
 
-        public RichCommonFieldsOptions(RichFieldType fieldType, string firstArgument, RichFieldFormat? format = null) : base(fieldType, format)
+        public RichCommonFieldsOptions(RichEditFieldType fieldType, string firstArgument, RichFieldFormat? format = null) : base(fieldType, format)
         {
             FirstArgument = firstArgument;
         }
 
-        public static RichCommonFieldsOptions Create(RichFieldType fieldType, string firstArgument, RichFieldFormat? format = null)
+        public static RichCommonFieldsOptions Create(RichEditFieldType fieldType, string firstArgument, RichFieldFormat? format = null)
         {
             return new RichCommonFieldsOptions(fieldType, firstArgument, format);
         }

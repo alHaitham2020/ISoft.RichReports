@@ -13,6 +13,5 @@ namespace ISoft.RichReportDesigner.Core.RichEdit
         bool TryGetService<T>(out T service) where T : class;
 
         bool HasService<T>() where T : class;
-
     }
 }

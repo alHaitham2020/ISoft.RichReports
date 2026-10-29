@@ -1,7 +1,7 @@
 ﻿using ISoft.Office.Barcode;
+using ISoft.Office.Images;
 using ISoft.RichReportDesigner.Core.Fields.Data;
 using ISoft.RichReportDesigner.Core.Fields.Format;
-using ISoft.RichReportDesigner.Core.Images;
 using ISoft.Utils.Constants;
 using System;
 

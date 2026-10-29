@@ -20,9 +20,9 @@ namespace ISoft.RichReportDesigner.Core.RichEdit
             _calculatorService = calculatorService;
         }
 
-        public RichMergeField GetMergeField(Field field)
+        public RichEditMergeField GetMergeField(Field field)
         {
-            return ParseField<RichMergeField>(field);
+            return ParseField<RichEditMergeField>(field);
         }
 
         public T ParseField<T>(Field field) where T : CalculatedFieldBase

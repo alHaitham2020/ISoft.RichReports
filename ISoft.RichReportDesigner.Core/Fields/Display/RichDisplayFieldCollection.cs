@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace ISoft.RichReportDesigner.Core.Fields.Display
 {
-    public class RichDisplayFieldCollection : ObservableUniqueDataCollectionBase<RichFieldKey, IRichDisplayField>, IRichDisplayFieldsCollection
+    public class RichDisplayFieldCollection : ObservableUniqueDataCollectionBase<RichEditFieldKey, IRichDisplayField>, IRichDisplayFieldsCollection
     {
-        private static readonly Func<IRichDisplayField, RichFieldKey> _selector = (x) => x.FieldKey;
+        private static readonly Func<IRichDisplayField, RichEditFieldKey> _selector = (x) => x.FieldKey;
 
         public RichDisplayFieldCollection() : base(_selector)
         {
@@ -21,22 +21,22 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
             
         }
 
-        protected override bool IsValidKey(RichFieldKey key) => key.IsValid();
+        protected override bool IsValidKey(RichEditFieldKey key) => key.IsValid();
 
         protected override IRichDisplayField CloneItem(IRichDisplayField item) => item.CreateClone();
 
-        IEnumerable<RichFieldKey> IRichDisplayFieldsReadOnlyCollection.FieldKeys => Keys;
+        IEnumerable<RichEditFieldKey> IRichDisplayFieldsReadOnlyCollection.FieldKeys => Keys;
 
         IRichDisplayField IRichDisplayFieldsReadOnlyCollection.FindByFieldProperty(string fieldProperty)
         {
             return Values.SingleOrDefault(x => fieldProperty.EqualsTo(x.FieldProperty));
         }
 
-        bool IRichDisplayFieldsReadOnlyCollection.ContainsField(RichFieldKey key) => ContainsKey(key);
+        bool IRichDisplayFieldsReadOnlyCollection.ContainsField(RichEditFieldKey key) => ContainsKey(key);
 
-        IRichDisplayField IRichDisplayFieldsReadOnlyCollection.GetFieldByKey(RichFieldKey key) => GetItem(key);
+        IRichDisplayField IRichDisplayFieldsReadOnlyCollection.GetFieldByKey(RichEditFieldKey key) => GetItem(key);
 
-        bool IRichDisplayFieldsReadOnlyCollection.TryGetField(RichFieldKey key, out IRichDisplayField item) => TryGetItem(key, out item);
+        bool IRichDisplayFieldsReadOnlyCollection.TryGetField(RichEditFieldKey key, out IRichDisplayField item) => TryGetItem(key, out item);
 
         void IRichDisplayFieldsCollection.LoadFrom(IEnumerable<IRichDisplayField> source) => LoadFrom(source);
     }

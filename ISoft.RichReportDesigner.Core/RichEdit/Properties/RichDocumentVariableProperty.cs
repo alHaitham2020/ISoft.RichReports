@@ -1,5 +1,4 @@
 ﻿using ISoft.RichReportDesigner.Core.Fields.Format;
-using ISoft.RichReportDesigner.Core.Images;
 using System;
 
 namespace ISoft.RichReportDesigner.Core.RichEdit.Properties

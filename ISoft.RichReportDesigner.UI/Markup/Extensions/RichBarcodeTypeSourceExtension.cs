@@ -1,7 +1,6 @@
 ﻿using DevExpress.Mvvm;
 using ISoft.Core.UI.Helpers;
 using ISoft.Office.Barcode;
-using ISoft.RichReportDesigner.Core.Fields.Core;
 using System;
 using System.Collections.Generic;
 using System.Windows.Markup;

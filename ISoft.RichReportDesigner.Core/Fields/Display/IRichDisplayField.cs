@@ -6,9 +6,9 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
     {
         new IRichDisplayFieldGroup ParentGroup { get; }
 
-        RichFieldType FieldType { get; }
+        RichEditFieldType FieldType { get; }
 
-        RichFieldKey FieldKey { get; }
+        RichEditFieldKey FieldKey { get; }
 
         bool IsNestedPictureField { get; }
 

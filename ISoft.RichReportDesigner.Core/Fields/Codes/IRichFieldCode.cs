@@ -6,15 +6,15 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
 {
     public interface IRichFieldCode
     {
-        RichFieldInfo FieldInfo { get; }
+        RichEditFieldInfo FieldInfo { get; }
 
-        RichFieldType FieldType { get;}
+        RichEditFieldType FieldType { get;}
 
         string FieldName { get; }
 
         string FieldProperty { get; }
 
-        RichFieldKey FieldKey { get; }
+        RichEditFieldKey FieldKey { get; }
 
         bool IsTableStart { get; }
 
@@ -38,7 +38,8 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
 
         bool IsValid();
 
-        IRichFieldCode Copy();
         void Validate();
+
+        IRichFieldCode Copy();
     }
 }

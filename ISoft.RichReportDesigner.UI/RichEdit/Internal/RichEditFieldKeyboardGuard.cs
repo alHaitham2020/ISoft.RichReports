@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 
-namespace ISoft.RichReportDesigner.UI.Internal
+namespace ISoft.RichReportDesigner.UI.RichEdit.Internal
 {
     //public sealed class RichEditFieldKeyboardGuard
     //{
@@ -167,16 +167,7 @@ namespace ISoft.RichReportDesigner.UI.Internal
         private readonly RichEditControl _control;
         private bool _installed;
 
-        private static readonly HashSet<Key> BlockedEditKeys =
-            [
-            Key.Back,
-            Key.Delete,
-            Key.X,
-            Key.V,
-            Key.Enter,
-            Key.Tab,
-            Key.Space
-            ];
+        private static readonly HashSet<Key> BlockedEditKeys = [Key.Back, Key.Delete, Key.X, Key.V, Key.Enter, Key.Tab, Key.Space];
 
         public RichEditFieldKeyboardGuard(RichEditControl control)
         {

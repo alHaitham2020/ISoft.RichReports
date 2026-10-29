@@ -13,17 +13,17 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
 
         IRichDisplayField FindFieldByPath(string path);
 
-        IRichDisplayField FindFieldByKey(RichFieldKey fieldKey);
+        IRichDisplayField FindFieldByKey(RichEditFieldKey fieldKey);
 
-        IRichDisplayField FindNoneDataFieldByKey(RichFieldKey fieldKey);
+        IRichDisplayField FindNoneDataFieldByKey(RichEditFieldKey fieldKey);
 
         IRichDisplayFieldGroup FindGroup(string path);
 
         IRichDisplayField FindDataFieldByPath(string fieldPath);
 
-        IRichDisplayFieldGroup FindGroupContainingField(RichFieldKey fieldKey);
+        IRichDisplayFieldGroup FindGroupContainingField(RichEditFieldKey fieldKey);
 
-        IRichDisplayField FindDataFieldByKey(RichFieldKey fieldKey);
+        IRichDisplayField FindDataFieldByKey(RichEditFieldKey fieldKey);
 
         IRichDisplayFieldGroup FindGroupByCategory(RichDisplayFieldGroupCategory category);
 

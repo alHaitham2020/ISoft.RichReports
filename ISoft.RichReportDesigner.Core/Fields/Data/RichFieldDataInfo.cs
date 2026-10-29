@@ -1,4 +1,4 @@
-﻿using ISoft.RichReportDesigner.Core.Images;
+﻿using ISoft.Office.Images;
 using System;
 
 namespace ISoft.RichReportDesigner.Core.Fields.Data

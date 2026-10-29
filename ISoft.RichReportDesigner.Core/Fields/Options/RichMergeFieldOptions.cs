@@ -6,7 +6,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
 {
     public class RichMergeFieldOptions : RichBarcodeFieldOptionsBase
     {
-        public override RichFieldType FieldType => RichFieldType.MergeField;
+        public override RichEditFieldType FieldType => RichEditFieldType.MergeField;
 
         [RichFieldArgument(0)]
         public string DataFieldPath { get; set; }

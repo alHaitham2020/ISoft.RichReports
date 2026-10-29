@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraRichEdit.API.Native;
 using ISoft.RichReportDesigner.Core.Fields.Regions;
+using ISoft.RichReportDesigner.Core.Fields.Search;
 using ISoft.RichReportDesigner.Core.RichEdit.Services;
 using ISoft.Utils.Helpers;
 using System;
@@ -38,17 +39,20 @@ namespace ISoft.RichReportDesigner.Core.Rendering
         {
             if (document == null) throw new ArgumentNullException(nameof(document));
 
-            using var scanner = document.CreateRegionScanner(autoScan:true);
+            using var scanner = document.CreateRegionScanner(autoScan: true);
 
             document.BeginUpdate();
             try
             {
-                var tableCount = document.Tables.Count;
-                for (int i = 0; i < tableCount; i++)
+                document.ProcessSubDocuments(doc =>
                 {
-                    var table = document.Tables[i];
-                    ProcessTable(document, table, scanner);
-                }
+                    var tableCount = doc.Tables.Count;
+                    for (int i = 0; i < tableCount; i++)
+                    {
+                        var table = doc.Tables[i];
+                        ProcessTable(doc, table, scanner);
+                    }
+                });
             }
             finally
             {
@@ -68,13 +72,16 @@ namespace ISoft.RichReportDesigner.Core.Rendering
             document.BeginUpdate();
             try
             {
-                var tableCount = document.Tables.Count;
-                for (int i = 0; i < tableCount; i++)
+                document.ProcessSubDocuments(doc =>
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
-                    var table = document.Tables[i];
-                    ProcessTable(document, table, scanner);
-                }
+                    var tableCount = doc.Tables.Count;
+                    for (int i = 0; i < tableCount; i++)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        var table = doc.Tables[i];
+                        ProcessTable(doc, table, scanner);
+                    }
+                });
             }
             finally
             {
@@ -89,7 +96,7 @@ namespace ISoft.RichReportDesigner.Core.Rendering
         /// <summary>
         /// Process a single table with hierarchy awareness
         /// </summary>
-        private void ProcessTable(Document document, Table table, IMailMergeDocumentRegionScanner scanner)
+        private void ProcessTable(SubDocument document, Table table, IMailMergeDocumentRegionScanner scanner)
         {
             var rowCount = table.Rows.Count;
             for (int r = _startRowIndex; r < rowCount; r++)
@@ -106,7 +113,7 @@ namespace ISoft.RichReportDesigner.Core.Rendering
         /// <summary>
         /// Process a single row for dataTable fields
         /// </summary>
-        private void ProcessTableRow(Document document, TableRow row, IMailMergeDocumentRegionScanner scanner)
+        private void ProcessTableRow(SubDocument document, TableRow row, IMailMergeDocumentRegionScanner scanner)
         {
             if (!CanInjectRowRegion(row)) return;
 
@@ -127,7 +134,7 @@ namespace ISoft.RichReportDesigner.Core.Rendering
         /// <summary>
         /// Removes a specific field from a region
         /// </summary>
-        private void RemoveRegions(Document document, IRichReadOnlyRegionCollection regions)
+        private void RemoveRegions(SubDocument document, IRichReadOnlyRegionCollection regions)
         {
             try
             {

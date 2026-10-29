@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace ISoft.RichReportDesigner.Core.RichEdit.Fields
 {
-    public class RichExpressionEditorCalculatedField : RichCalculatedFieldBase
+    public class RichExpressionEditorCalculatedField : RichEditCalculatedFieldBase
     {
         public static readonly string FieldType = "EXPEDITORFIELD";
 
@@ -83,7 +83,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Fields
                 // apply formating before barcode generation, because barcode generation is based on the text value
                 ApplyFieldFormatting(calculatedValue, sourcePieceTable.DocumentModel.MailMergeOptions.CustomSeparators);
 
-                return FieldBarcodeManager.InsertBarcodeImage(
+                return RichEditFieldBarcodeManager.InsertBarcodeImage(
                     sourcePieceTable,
                     calculatedValue.Text,
                     _barcodeType,

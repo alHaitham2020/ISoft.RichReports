@@ -1,5 +1,5 @@
 ﻿using DevExpress.XtraPrinting;
-using ISoft.Printing.Core.Data;
+using ISoft.Printing.Shared.Data;
 using ISoft.RichReportDesigner.Core.Data;
 using ISoft.RichReportDesigner.Core.Fields.Data;
 using ISoft.RichReportDesigner.Core.RichEdit;
@@ -14,7 +14,7 @@ namespace ISoft.RichReportDesigner.Core.Reports
     {
         IReportInfo ReportInfo { get; }
 
-        IRichDataSource DataSource { get; }
+        IRichReportDataSource DataSource { get; }
 
         IRichDataFieldGroupCollection DataFields { get; }
 
@@ -34,10 +34,6 @@ namespace ISoft.RichReportDesigner.Core.Reports
 
         IRichReportCalculatedFieldStorage CalculatedFieldStorage { get; }
 
-        internal void OnCalculatedFieldChanged(string fieldName);
-
-        internal void OnCalculatedFieldRemoved(string fieldName);
-
         Task PrintAsync(Guid? templateKey);
 
         Task PrintDirectAsync(Guid? templateKey);
@@ -53,6 +49,9 @@ namespace ISoft.RichReportDesigner.Core.Reports
         Task ShowPrintDialogAsync(IRichReportTemplate template);
 
         Task ShowPrintPreviewAsync(IRichReportTemplate template);
-       
+
+        internal void OnCalculatedFieldChanged(string fieldName);
+
+        internal void OnCalculatedFieldRemoved(string fieldName);
     }
 }

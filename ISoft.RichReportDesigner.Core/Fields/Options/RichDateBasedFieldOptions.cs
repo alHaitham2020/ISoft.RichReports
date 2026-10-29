@@ -9,9 +9,9 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
     /// </summary>
     public class RichDateBasedFieldOptions : RichFormatableFieldOptionsBase
     {
-        private readonly RichFieldType _fieldType;
+        private readonly RichEditFieldType _fieldType;
 
-        public override RichFieldType FieldType => _fieldType;
+        public override RichEditFieldType FieldType => _fieldType;
 
         [RichFieldSwitch(RichFieldSwitchKeys.DateField.UseLunarCalendar)]
         public bool UseLunarCalendar { get; set; }
@@ -22,13 +22,13 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
         [RichFieldSwitch(RichFieldSwitchKeys.DateField.UseLastFormat)]
         public bool UseLastFormat { get; set; }
 
-        public RichDateBasedFieldOptions(RichFieldType fieldType, RichFieldFormat? format = null)
+        public RichDateBasedFieldOptions(RichEditFieldType fieldType, RichFieldFormat? format = null)
         {
             _fieldType = fieldType;
             Format = format;
         }
 
-        public static RichDateBasedFieldOptions Create(RichFieldType fieldType, RichFieldFormat? format = null)
+        public static RichDateBasedFieldOptions Create(RichEditFieldType fieldType, RichFieldFormat? format = null)
         {
             return new RichDateBasedFieldOptions(fieldType, format);
         }

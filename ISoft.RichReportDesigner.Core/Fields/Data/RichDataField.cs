@@ -12,6 +12,9 @@ namespace ISoft.RichReportDesigner.Core.Fields.Data
 
         public bool AllowUseDefaultEmptyValue { get; set; }
 
+        /// <summary>
+        /// if IsDetailField (is Row in table) then name else full path
+        /// </summary>
         public string FieldDataName => IsDetailField ? Name : Path;
 
         public RichDataField()

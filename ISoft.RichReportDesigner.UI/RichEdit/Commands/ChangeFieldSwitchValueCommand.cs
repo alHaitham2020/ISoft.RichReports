@@ -1,6 +1,7 @@
 ﻿using DevExpress.Utils.Commands;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.Model;
+using ISoft.RichReportDesigner.Core.Fields.Format;
 using ISoft.RichReportDesigner.Core.Fields.Switches;
 using ISoft.RichReportDesigner.Core.RichEdit;
 using ISoft.Utils.Helpers;
@@ -18,6 +19,7 @@ namespace ISoft.RichReportDesigner.UI.RichEdit.Commands
 
         protected abstract T DefaultValue { get; }
 
+        #region Ovverides
         /// <summary>
         /// Retrieves the current value of the switch from the field code.
         /// Returns DefaultValue if field is null or switch is not found.
@@ -38,6 +40,9 @@ namespace ISoft.RichReportDesigner.UI.RichEdit.Commands
             return fieldSwitch.GetValue(DefaultValue);
         }
 
+        #endregion
+
+        #region Protected Actions
         /// <summary>
         /// Updates the switch value by rebuilding the entire field code.
         /// Use for complex field types where piece-table manipulation is unreliable.
@@ -140,6 +145,22 @@ namespace ISoft.RichReportDesigner.UI.RichEdit.Commands
             return Scanner.FindSpecificSwitch(Helper.GetCleanCode(field), SwitchKey);
         }
 
+        protected RichFieldFormatType GetFieldFormatType(Field field)
+        {
+            if (field == null)
+            {
+                return RichFieldFormatType.None;
+            }
+
+            var fieldSwitch = FindFieldSwitch(field);
+            if (fieldSwitch == null)
+            {
+                return RichFieldFormatType.None;
+            }
+
+            return fieldSwitch.IsFormatSwitch ? fieldSwitch.SwitchType.ToFormatType() : RichFieldFormatType.None;
+        }
+
         //    //private void ReplaceNative(ICommandUIState state)
         //    //{
         //    //    var vl = state as IValueBasedCommandUIState<FieldBarcodeType>;
@@ -156,5 +177,6 @@ namespace ISoft.RichReportDesigner.UI.RichEdit.Commands
         //    //        }
         //    //    }
         //    //}
+        #endregion
     }
 }

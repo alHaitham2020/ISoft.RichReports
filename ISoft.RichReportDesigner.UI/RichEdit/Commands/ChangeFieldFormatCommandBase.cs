@@ -3,6 +3,7 @@ using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.Model;
 using ISoft.RichReportDesigner.Core.Fields.Data;
 using ISoft.RichReportDesigner.Core.Fields.Display;
+using ISoft.RichReportDesigner.Core.Fields.Format;
 
 namespace ISoft.RichReportDesigner.UI.RichEdit.Commands
 {

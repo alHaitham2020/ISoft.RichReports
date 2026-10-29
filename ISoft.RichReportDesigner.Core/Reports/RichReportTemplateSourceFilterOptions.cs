@@ -1,4 +1,5 @@
 ﻿using ISoft.Printing.Core.Data;
+using ISoft.Printing.Shared.Data;
 using System;
 
 namespace ISoft.RichReportDesigner.Core.Reports

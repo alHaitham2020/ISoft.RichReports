@@ -5,17 +5,17 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
 {
     public class RichFormatableFieldOptions : RichFormatableFieldOptionsBase
     {
-        private readonly RichFieldType _fieldType;
+        private readonly RichEditFieldType _fieldType;
 
-        public override RichFieldType FieldType => _fieldType;
+        public override RichEditFieldType FieldType => _fieldType;
 
-        public RichFormatableFieldOptions(RichFieldType fieldType, RichFieldFormat? format = null)
+        public RichFormatableFieldOptions(RichEditFieldType fieldType, RichFieldFormat? format = null)
         {
             _fieldType = fieldType;
             Format = format;
         }
 
-        public static RichFormatableFieldOptions Create(RichFieldType fieldType,RichFieldFormat? format = null)
+        public static RichFormatableFieldOptions Create(RichEditFieldType fieldType,RichFieldFormat? format = null)
         {
             return new RichFormatableFieldOptions(fieldType, format);
         }

@@ -24,6 +24,8 @@ namespace ISoft.RichReportDesigner.Core.Fields.Regions
         private DateTime _lastScanTime = DateTime.MinValue;
         private bool _isScanning;
 
+        public bool IsScanning => _isScanning;
+
         #endregion
 
         #region Constructors

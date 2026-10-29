@@ -5,7 +5,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
 {
     public interface IRichFieldOptions
     {
-        RichFieldType FieldType { get; }
+        RichEditFieldType FieldType { get; }
 
         bool CanApplyArgumentValue(string propertyName);
 
@@ -14,7 +14,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
 
     public abstract class RichFieldOptionsBase : ObjectBase, IRichFieldOptions
     {
-        public abstract RichFieldType FieldType { get; }
+        public abstract RichEditFieldType FieldType { get; }
 
         protected virtual bool CanApplySwitchValue(string propertyName)
         {

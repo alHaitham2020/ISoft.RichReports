@@ -11,13 +11,16 @@ namespace ISoft.RichReportDesigner.UI.Controllers
 
         public RichDesignerCommandsHandler CommandsHandler { get; }
 
-        public RichDesignerController(IRichReportDesignerControl control)
+        public RichDesignerEditorController Editor { get; }
+
+        public RichDesignerController(RichReportDesignerControl control)
         {
             ArgumentGuardHelper.ArgumentNotNull(control,nameof(control));
 
             Fields = new RichDesignerFieldController(control);
             Template = new RichDesignerTemplateController(control);
             CommandsHandler = new RichDesignerCommandsHandler(control, Template);
+            Editor = new RichDesignerEditorController(control);
         }
     }
 }

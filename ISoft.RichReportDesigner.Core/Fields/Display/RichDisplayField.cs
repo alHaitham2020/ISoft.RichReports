@@ -1,7 +1,7 @@
-﻿using ISoft.RichReportDesigner.Core.Fields.Core;
+﻿using ISoft.Office.Images;
+using ISoft.RichReportDesigner.Core.Fields.Core;
 using ISoft.RichReportDesigner.Core.Fields.Data;
 using ISoft.RichReportDesigner.Core.Fields.Format;
-using ISoft.RichReportDesigner.Core.Images;
 using ISoft.Utils.Extentions;
 using System;
 using System.Drawing;
@@ -11,16 +11,16 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
     public class RichDisplayField : RichFieldNodeBase, IRichDisplayField
     {
         #region Fields
-        private readonly RichFieldType _fieldType;
-        private readonly RichFieldKey _fieldKey;
+        private readonly RichEditFieldType _fieldType;
+        private readonly RichEditFieldKey _fieldKey;
         #endregion
 
         #region Proprties
-        public RichFieldType FieldType => _fieldType;
+        public RichEditFieldType FieldType => _fieldType;
 
-        public RichFieldKey FieldKey => _fieldKey;
+        public RichEditFieldKey FieldKey => _fieldKey;
 
-        public bool IsNestedPictureField => FieldType != RichFieldType.IncludePictureField && IsImageField;
+        public bool IsNestedPictureField => FieldType != RichEditFieldType.IncludePictureField && IsImageField;
 
         public new IRichDisplayFieldGroup ParentGroup
         {
@@ -44,8 +44,8 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
 
         public RichDisplayField(IRichDataField dataField, IRichDisplayFieldGroup parentGroup)
         {
-            _fieldType = RichFieldType.MergeField;
-            _fieldKey = RichFieldKey.CreateFromType(_fieldType, dataField.FieldProperty);
+            _fieldType = RichEditFieldType.MergeField;
+            _fieldKey = RichEditFieldKey.CreateFromType(_fieldType, dataField.FieldProperty);
 
             Name = dataField.Name;
             DisplayName = dataField.DisplayName;
@@ -64,7 +64,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
         }
 
         public RichDisplayField(
-            RichFieldType fieldType,
+            RichEditFieldType fieldType,
             string name,
             string displayName,
             string path,
@@ -76,7 +76,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Display
             bool? isVisible = null)
         {
             _fieldType = fieldType;
-            _fieldKey = RichFieldKey.CreateFromType(fieldType, fieldProperty);
+            _fieldKey = RichEditFieldKey.CreateFromType(fieldType, fieldProperty);
 
             Name = name;
             DisplayName = displayName;

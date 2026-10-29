@@ -27,7 +27,7 @@ namespace ISoft.RichReportDesigner.UI.RichEdit.Commands
 
             return field.Parent == null && 
                   (field.CachedFieldType == MergefieldField.FieldType || 
-                   field.CachedFieldType == RichExpressionEditorCalculatedField.FieldType); // not neased field 
+                   field.CachedFieldType == RichExpressionEditorCalculatedField.FieldType); // not nested field 
         }
 
         protected override void ChangeValueCore(IValueBasedCommandUIState<BarcodeType> state)

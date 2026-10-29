@@ -5,6 +5,62 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Include="obj\Debug\net48\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+	  <Compile Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.AssemblyInfo.cs" />
+	  <Compile Include="obj\Debug\net8.0-windows\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" />
+	  <Compile Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.AssemblyInfo.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.csproj.FileListAbsolute.txt" />
+	  <Content Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.sourcelink.json" />
+	  <Content Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.csproj.FileListAbsolute.txt" />
+	  <Content Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.designer.deps.json" />
+	  <Content Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.designer.runtimeconfig.json" />
+	  <Content Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.sourcelink.json" />
+	  <Content Include="obj\ISoft.RichReportDesigner.Core.csproj.nuget.dgspec.json" />
+	  <Content Include="obj\project.assets.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="obj\Debug\net48\ar-SA\ISoft.RichReportDesigner.Core.resources.dll" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.AssemblyInfoInputs.cache" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.assets.cache" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.csproj.AssemblyReference.cache" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.csproj.BuildWithSkipAnalyzers" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.csproj.CoreCompileInputs.cache" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.csproj.GenerateResource.cache" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.dll" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.GeneratedMSBuildEditorConfig.editorconfig" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.Localization.Resources.ReportResources.ar-SA.resources" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.Localization.Resources.ReportResources.resources" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.Localization.Resources.RichFieldTypeNameResources.ar-SA.resources" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.Localization.Resources.RichFieldTypeNameResources.resources" />
+	  <None Include="obj\Debug\net48\ISoft.RichReportDesigner.Core.pdb" />
+	  <None Include="obj\Debug\net8.0-windows\ar-SA\ISoft.RichReportDesigner.Core.resources.dll" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.AssemblyInfoInputs.cache" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.assets.cache" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.csproj.AssemblyReference.cache" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.csproj.BuildWithSkipAnalyzers" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.csproj.CoreCompileInputs.cache" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.csproj.GenerateResource.cache" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.dll" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.GeneratedMSBuildEditorConfig.editorconfig" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.Localization.Resources.ReportResources.ar-SA.resources" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.Localization.Resources.ReportResources.resources" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.Localization.Resources.RichFieldTypeNameResources.ar-SA.resources" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.Localization.Resources.RichFieldTypeNameResources.resources" />
+	  <None Include="obj\Debug\net8.0-windows\ISoft.RichReportDesigner.Core.pdb" />
+	  <None Include="obj\Debug\net8.0-windows\refint\ISoft.RichReportDesigner.Core.dll" />
+	  <None Include="obj\Debug\net8.0-windows\ref\ISoft.RichReportDesigner.Core.dll" />
+	  <None Include="obj\Debug\net8.0-windows\TempPE\Localization.Resources.ReportResources.Designer.cs.dll" />
+	  <None Include="obj\Debug\net8.0-windows\TempPE\Localization.Resources.RichFieldTypeNameResources.Designer.cs.dll" />
+	  <None Include="obj\ISoft.RichReportDesigner.Core.csproj.nuget.g.props" />
+	  <None Include="obj\ISoft.RichReportDesigner.Core.csproj.nuget.g.targets" />
+	  <None Include="obj\project.nuget.cache" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\ISoft.Core\ISoft.Core.csproj" />
 		<ProjectReference Include="..\ISoft.Utils\ISoft.Utils.csproj" />
 		<ProjectReference Include="..\ISoft.Windows\ISoft.Windows.csproj" />
@@ -12,36 +68,10 @@
 		<ProjectReference Include="..\ISoft.Printing.Core\ISoft.Printing.Core.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Helpers\" />
-	</ItemGroup>
-
 	<!-- Add this section to your .csproj file -->
 	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
 		<Reference Include="System.Printing" />
 		<Reference Include="ReachFramework" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Compile Update="Localization\Resources\ReportResources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>ReportResources.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Localization\Resources\RichFieldTypeNameResources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>RichFieldTypeNameResources.resx</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-	<ItemGroup>
-	  <EmbeddedResource Update="Localization\Resources\ReportResources.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Localization\Resources\RichFieldTypeNameResources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>RichFieldTypeNameResources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
 	</ItemGroup>
 	
 </Project>

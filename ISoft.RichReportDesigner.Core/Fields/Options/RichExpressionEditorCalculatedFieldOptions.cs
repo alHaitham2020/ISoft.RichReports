@@ -6,7 +6,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
 {
     public class RichExpressionEditorCalculatedFieldOptions : RichBarcodeFieldOptionsBase
     {
-        public override RichFieldType FieldType => RichFieldType.ExpEditCalculatedField;
+        public override RichEditFieldType FieldType => RichEditFieldType.ExpEditCalculatedField;
 
         [RichFieldArgument(0)]
         public string ExpressionString { get; set; }

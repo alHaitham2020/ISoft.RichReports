@@ -3,7 +3,10 @@ using ISoft.RichReportDesigner.Core.Designer;
 using ISoft.RichReportDesigner.Core.Templates;
 using ISoft.RichReportDesigner.UI.DataModel;
 using ISoft.RichReportDesigner.UI.Internal;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace ISoft.RichReportDesigner.UI.Controls
 {
@@ -22,6 +25,10 @@ namespace ISoft.RichReportDesigner.UI.Controls
         RichReportDesignerCommands ActualCommands { get; }
 
         bool IsRightToLeft { get; }
+
+        void ExecuteWithDispatcher(Action action, DispatcherPriority priority);
+
+        Task ExecuteWithDispatcherAsync(Action action, DispatcherPriority priority);
 
         internal void RaiseActiveTemplateChanged(IRichReportTemplate template);
 

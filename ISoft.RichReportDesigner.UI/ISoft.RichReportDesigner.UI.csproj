@@ -22,13 +22,54 @@
 		<ProjectReference Include="..\ISoft.Windows\ISoft.Windows.csproj" />
 		<ProjectReference Include="..\ISoft.Printing.Core\ISoft.Printing.Core.csproj" />
 		<ProjectReference Include="..\ISoft.Printing.UI\ISoft.Printing.UI.csproj" />
-		<ProjectReference Include="..\ISoft.RichReportDesigner.Core\ISoft.RichReportDesigner.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="View\RichReportTemplatesEditorDialogView.xaml.cs">
-	    <SubType>Code</SubType>
-	  </Compile>
+	  <None Update="Themes\Controls\RichReportDesignerControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\Controls\RichReportDesignerFieldsPanel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\Controls\RichReportViewerControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\Generic.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\Internal\DesignerResources.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\Internal\RibbonItemsStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\Internal\RibbonStylesGenerator.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\Shared\RichReportDesignerViewResources.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\Shared\SharedTheme.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="View\RichCalculatedFieldForm.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="View\RichCalculatedFieldsEditorForm.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="View\RichReportDesignerDocumentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="View\RichReportDesignerWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="View\RichReportPreviewDocumentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="View\RichReportTemplatesEditorDialogView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
 	</ItemGroup>
 
 </Project>

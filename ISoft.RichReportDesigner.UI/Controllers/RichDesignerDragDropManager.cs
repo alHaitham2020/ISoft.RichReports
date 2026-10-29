@@ -1,8 +1,8 @@
 ﻿using DevExpress.Xpf.Accordion;
 using ISoft.RichReportDesigner.Core.Fields.Display;
 using ISoft.RichReportDesigner.UI.Controls;
-using ISoft.Utils.Extentions;
 using ISoft.Utils.Helpers;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,81 +10,85 @@ using System.Windows.Media;
 
 namespace ISoft.RichReportDesigner.UI.Controllers
 {
-    internal class RichDesignerDragDropManager
+    internal sealed class RichDesignerDragDropManager
     {
+        private const string FieldDropFormat = "RichFieldDropFormate"; // keep the string value!
+
         private readonly RichReportDesignerControl _designer;
 
-        private RichReportDesignerFieldsPanel fieldsPanel;
-
-        private XpfRichEditorControl editor;
-
-        private const string FieldDropFormat = "RichFieldDropFormate"; // keep the string value!
+        private RichReportDesignerFieldsPanel _fieldsPanel;
+        private XpfRichEditorControl _editor;
 
         private Point _dragStartPoint;
         private IRichDisplayField _draggedField;
 
         public RichDesignerDragDropManager(RichReportDesignerControl designerControl)
         {
-            _designer = designerControl;
+            _designer = designerControl ?? throw new ArgumentNullException(nameof(designerControl));
         }
 
         public void Install(RichReportDesignerFieldsPanel fieldsPanel, XpfRichEditorControl editorControl)
         {
-            this.fieldsPanel = fieldsPanel;
-            this.editor = editorControl;
+            Uninstall();
+
+            _fieldsPanel = fieldsPanel;
+            _editor = editorControl;
 
             Subscribe();
         }
 
-        public void UnInstall()
+        public void Uninstall()
         {
-            if (fieldsPanel != null && editor != null)
-            {
-                Unsubscribe();
-                fieldsPanel = null;
-                editor = null;
-            }
+            Unsubscribe();
+
+            _fieldsPanel = null;
+            _editor = null;
+            _draggedField = null;
         }
 
         private void Subscribe()
         {
-            fieldsPanel.DoIfNotNull(panel =>
+            if (_fieldsPanel != null)
             {
-                panel.PreviewMouseLeftButtonDown += Accordion_PreviewMouseLeftButtonDown;
-                panel.PreviewMouseMove += Accordion_PreviewMouseMove;
-                panel.PreviewMouseDoubleClick += Accordion_PreviewMouseDoubleClick;
-            });
+                _fieldsPanel.PreviewMouseLeftButtonDown += OnFieldsPanelMouseLeftButtonDown;
+                _fieldsPanel.PreviewMouseMove += OnFieldsPanelMouseMove;
+                _fieldsPanel.PreviewMouseDoubleClick += OnFieldsPanelMouseDoubleClick;
+            }
 
-            editor.DoIfNotNull(editor =>
+            if (_editor != null)
             {
-                // Set up event handlers
-                editor.DragEnter += Editor_DragEnter;
-                editor.DragOver += Editor_DragOver;
-                editor.Drop += Editor_DragDrop;
-            });
+                _editor.DragEnter += OnEditorDragEnter;
+                _editor.DragOver += OnEditorDragOver;
+                _editor.Drop += OnEditorDrop;
+            }
         }
 
         private void Unsubscribe()
         {
-            fieldsPanel.DoIfNotNull(panel =>
+            if (_fieldsPanel != null)
             {
-                // Set up event handlers
-                panel.PreviewMouseLeftButtonDown -= Accordion_PreviewMouseLeftButtonDown;
-                panel.PreviewMouseMove -= Accordion_PreviewMouseMove;
-                panel.PreviewMouseDoubleClick -= Accordion_PreviewMouseDoubleClick;
-            });
+                _fieldsPanel.PreviewMouseLeftButtonDown -= OnFieldsPanelMouseLeftButtonDown;
+                _fieldsPanel.PreviewMouseMove -= OnFieldsPanelMouseMove;
+                _fieldsPanel.PreviewMouseDoubleClick -= OnFieldsPanelMouseDoubleClick;
+            }
 
-            editor.DoIfNotNull(editor =>
+            if (_editor != null)
             {
-                editor.DragEnter -= Editor_DragEnter;
-                editor.DragOver -= Editor_DragOver;
-                editor.Drop -= Editor_DragDrop;
-            });
+                _editor.DragEnter -= OnEditorDragEnter;
+                _editor.DragOver -= OnEditorDragOver;
+                _editor.Drop -= OnEditorDrop;
+            }
         }
 
-        // ---------- Panel side (source) ----------
+        // ---------- Source: fields panel ----------
 
-        private void Accordion_PreviewMouseMove(object sender, MouseEventArgs e)
+        private void OnFieldsPanelMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _dragStartPoint = e.GetPosition(null);
+            _draggedField = FindAccordionItem(e.OriginalSource as DependencyObject)?.DataContext as IRichDisplayField;
+        }
+
+        private void OnFieldsPanelMouseMove(object sender, MouseEventArgs e)
         {
             if (_draggedField == null || e.LeftButton != MouseButtonState.Pressed)
                 return;
@@ -92,105 +96,83 @@ namespace ISoft.RichReportDesigner.UI.Controllers
             if (!DragDropHelper.ShouldStartDrag(_dragStartPoint, e.GetPosition(null)))
                 return;
 
-            var fieldToDrag = _draggedField;
-            _draggedField = null;
+            var field = _draggedField;
+            _draggedField = null; // consume, so a subsequent move won't restart a drag
 
             DragDrop.DoDragDrop(
-                fieldsPanel,
-                new DataObject(FieldDropFormat, fieldToDrag),
+                _fieldsPanel,
+                new DataObject(FieldDropFormat, field),
                 DragDropEffects.Copy);
         }
 
-        private void Accordion_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void OnFieldsPanelMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            _dragStartPoint = e.GetPosition(null);
-            _draggedField = null;
+            if (FindAccordionItem(e.OriginalSource as DependencyObject)?.DataContext is not IRichDisplayField field)
+                return; // header / scrollbar / empty area → let the accordion handle it
 
-            var item = FindAccordionItem(e.OriginalSource as DependencyObject);
-            if (item?.DataContext is IRichDisplayField field)
-                _draggedField = field;
-        }
-
-        private void Accordion_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var item = FindAccordionItem(e.OriginalSource as DependencyObject);
-
-            if (item?.DataContext is not IRichDisplayField field)
-                return;   // header / scrollbar / empty area → let the accordion handle it
-
+            _draggedField = null; // prevent an accidental drag after a double-click
             e.Handled = true;
             InsertDocumentField(field);
         }
 
-        // ---------- Editor side (target) ----------
+        // ---------- Target: editor ----------
 
-        private void Editor_DragEnter(object sender, DragEventArgs e)
+        private void OnEditorDragEnter(object sender, DragEventArgs e) => _editor.Focus();
+
+        private void OnEditorDragOver(object sender, DragEventArgs e)
         {
-            editor.Focus();
-        }
+            e.Handled = true;
 
-        private void Editor_DragOver(object sender, DragEventArgs e)
-        {
-            var point = e.GetPosition(editor);
-
-            var position = editor.GetDropPosition(new System.Drawing.Point((int)point.X, (int)point.Y));
-            if (position == null)
+            if (!TryGetField(e.Data, out _))
             {
                 e.Effects = DragDropEffects.None;
                 return;
             }
 
-            editor.Document.CaretPosition = position;
-            editor.ScrollToCaret();
+            var point = e.GetPosition(_editor);
+            var caret = _editor.GetDropPosition(new System.Drawing.Point((int)point.X, (int)point.Y));
+            if (caret == null)
+            {
+                e.Effects = DragDropEffects.None;
+                return;
+            }
+
+            _editor.Document.CaretPosition = caret;
+            _editor.ScrollToCaret();
             e.Effects = DragDropEffects.Copy;
-            e.Handled = true;
         }
 
-        private void Editor_DragDrop(object sender, DragEventArgs e)
+        private void OnEditorDrop(object sender, DragEventArgs e)
         {
             e.Handled = true;
 
-            if (e.Data.GetDataPresent(FieldDropFormat) && e.Data.GetData(FieldDropFormat) is IRichDisplayField field)
-            {
+            if (TryGetField(e.Data, out var field))
                 InsertDocumentField(field);
-            }
         }
 
         private void InsertDocumentField(IRichDisplayField field)
         {
-            editor.Focus();
+            _editor.Focus();
             _designer.InsertField(field);
+        }
+
+        private static bool TryGetField(IDataObject data, out IRichDisplayField field)
+        {
+            field = data != null && data.GetDataPresent(FieldDropFormat)
+                ? data.GetData(FieldDropFormat) as IRichDisplayField
+                : null;
+
+            return field != null;
         }
 
         private static AccordionItem FindAccordionItem(DependencyObject source)
         {
             for (var node = source; node != null; node = VisualTreeHelper.GetParent(node))
             {
-                if (node is ScrollViewer) return null;
+                if (node is ScrollViewer) return null; // inside the content area, not the item
                 if (node is AccordionItem item) return item;
             }
             return null;
         }
-
-        //private FrameworkElement CreateDragVisual(DataField field)
-        //        {
-        //            var border = new Border
-        //            {
-        //                Background = Brushes.LightBlue,
-        //                BorderBrush = Brushes.DarkBlue,
-        //                BorderThickness = new Thickness(1),
-        //                Padding = new Thickness(8, 4, 8, 4),
-        //                CornerRadius = new CornerRadius(3),
-        //                Opacity = 0.8,
-        //                Child = new TextBlock
-        //                {
-        //                    Text = field.DisplayName,
-        //                    FontWeight = FontWeights.Bold,
-        //                    Foreground = Brushes.DarkBlue
-        //                }
-        //            };
-
-        //            return border;
-        //        }
     }
 }

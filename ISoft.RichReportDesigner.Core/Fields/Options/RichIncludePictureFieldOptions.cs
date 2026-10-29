@@ -9,7 +9,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
     /// </summary>
     public class RichIncludePictureFieldOptions : RichImageFieldOptionsBase
     {
-        public override RichFieldType FieldType => RichFieldType.IncludePictureField;
+        public override RichEditFieldType FieldType => RichEditFieldType.IncludePictureField;
 
         [RichFieldArgument(0)]
         public string Uri { get; set; }

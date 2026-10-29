@@ -26,7 +26,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services.Implementation
         }
 
         #region RichEditFieldsManagerService Implemntation
-        public string GetFieldDisplayName(RichFieldType fieldType)
+        public string GetFieldDisplayName(RichEditFieldType fieldType)
         {
             return _displayNameProvider.GetDisplayName(fieldType);
         }
@@ -36,17 +36,17 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services.Implementation
         /// </summary>
         /// <param name="fieldType">The field type</param>
         /// <returns>The field information</returns>
-        public RichFieldInfo? GetFieldInfo(RichFieldType fieldType)
+        public RichEditFieldInfo? GetFieldInfo(RichEditFieldType fieldType)
         {
-            return RichFieldInfoProvider.GetFieldInfoByType(fieldType);
+            return RichEditFieldInfoProvider.GetFieldInfoByType(fieldType);
         }
 
         /// <summary>
         /// Tries to get field information by field type
         /// </summary>
-        public bool TryGetFieldInfo(RichFieldType fieldType, out RichFieldInfo info)
+        public bool TryGetFieldInfo(RichEditFieldType fieldType, out RichEditFieldInfo info)
         {
-            return RichFieldInfoProvider.TryGetFieldInfoByType(fieldType, out info);
+            return RichEditFieldInfoProvider.TryGetFieldInfoByType(fieldType, out info);
         }
 
         /// <summary>
@@ -54,18 +54,18 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services.Implementation
         /// </summary>
         /// <param name="fieldName">The field name</param>
         /// <returns>The field information if found</returns>
-        public RichFieldInfo? GetFieldInfoByName(string fieldName)
+        public RichEditFieldInfo? GetFieldInfoByName(string fieldName)
         {
             if (string.IsNullOrWhiteSpace(fieldName))
                 throw new ArgumentException("Field name cannot be null or empty", nameof(fieldName));
 
-            return RichFieldInfoProvider.GetFieldInfoByName(fieldName);
+            return RichEditFieldInfoProvider.GetFieldInfoByName(fieldName);
         }
 
         /// <summary>
         /// Tries to get field information by field name
         /// </summary>
-        public bool TryGetFieldInfoByName(string fieldName, out RichFieldInfo info)
+        public bool TryGetFieldInfoByName(string fieldName, out RichEditFieldInfo info)
         {
             if (string.IsNullOrWhiteSpace(fieldName))
             {
@@ -73,7 +73,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services.Implementation
                 return false;
             }
 
-            return RichFieldInfoProvider.TryGetFieldInfoByName(fieldName, out info);
+            return RichEditFieldInfoProvider.TryGetFieldInfoByName(fieldName, out info);
 
         }
 
@@ -81,9 +81,9 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services.Implementation
         /// Gets all field information
         /// </summary>
         /// <returns>Dictionary of all field information</returns>
-        public IReadOnlyDictionary<RichFieldType, RichFieldInfo> GetAllFieldInfos()
+        public IReadOnlyDictionary<RichEditFieldType, RichEditFieldInfo> GetAllFieldInfos()
         {
-            return RichFieldInfoProvider.GetAllFields().ToFrozenDictionary(x => x.FieldType);
+            return RichEditFieldInfoProvider.GetAllFields().ToFrozenDictionary(x => x.FieldType);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services.Implementation
         /// </summary>
         public IEnumerable<string> GetAllFieldNames()
         {
-            return RichFieldInfoProvider.GetAllFieldsName();
+            return RichEditFieldInfoProvider.GetAllFieldsName();
         }
 
         /// <summary>
@@ -99,18 +99,18 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services.Implementation
         /// </summary>
         /// <param name="type">The field value type</param>
         /// <returns>Fields that return the specified type</returns>
-        public IEnumerable<RichFieldInfo> GetFieldsByType(Type type)
+        public IEnumerable<RichEditFieldInfo> GetFieldsByType(Type type)
         {
             ArgumentGuardHelper.ArgumentNotNull(type);
-            return RichFieldInfoProvider.GetAllFields().Where(info => info.Type == type);
+            return RichEditFieldInfoProvider.GetAllFields().Where(info => info.Type == type);
         }
 
         /// <summary>
         /// Checks if a field type exists
         /// </summary>
-        public bool HasFieldType(RichFieldType fieldType)
+        public bool HasFieldType(RichEditFieldType fieldType)
         {
-            return RichFieldInfoProvider.IsSupportedFieldType(fieldType);
+            return RichEditFieldInfoProvider.IsSupportedFieldType(fieldType);
         }
 
         /// <summary>
@@ -121,13 +121,13 @@ namespace ISoft.RichReportDesigner.Core.RichEdit.Services.Implementation
             if (string.IsNullOrWhiteSpace(fieldName))
                 return false;
 
-            return RichFieldInfoProvider.IsSupportedFieldType(fieldName);
+            return RichEditFieldInfoProvider.IsSupportedFieldType(fieldName);
         }
 
         /// <summary>
         /// Gets the field type by field name
         /// </summary>
-        public RichFieldType? GetFieldTypeByName(string fieldName)
+        public RichEditFieldType? GetFieldTypeByName(string fieldName)
         {
             if (TryGetFieldInfoByName(fieldName, out var info))
                 return info.FieldType;

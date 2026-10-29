@@ -1,5 +1,6 @@
 ﻿using DevExpress.Mvvm.POCO;
 using ISoft.Printing.Core.Data;
+using ISoft.Printing.Shared.Data;
 using ISoft.RichReportDesigner.Core.Reports;
 using ISoft.RichReportDesigner.Core.Templates;
 using ISoft.Utils.Helpers;

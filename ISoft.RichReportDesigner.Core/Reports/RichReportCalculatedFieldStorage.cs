@@ -1,4 +1,5 @@
 ﻿using ISoft.Printing.Core.Data;
+using ISoft.Printing.Shared.Data;
 using ISoft.Utils.Helpers;
 using System;
 using System.Collections.Generic;

@@ -6,7 +6,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Options
 {
     public class RichDocPropertyFieldOptions : RichFormatableFieldOptionsBase
     {
-        public override RichFieldType FieldType => RichFieldType.DocPropertyField;
+        public override RichEditFieldType FieldType => RichEditFieldType.DocPropertyField;
 
         [RichFieldArgument(0)]
         public string PropertyName { get; set; }

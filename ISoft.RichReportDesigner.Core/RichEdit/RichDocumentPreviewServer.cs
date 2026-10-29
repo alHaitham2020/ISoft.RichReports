@@ -42,7 +42,8 @@ namespace ISoft.RichReportDesigner.Core.RichEdit
             SubscribeEvents();
         }
 
-        public static IRichDocumentPreviewServer Create(IRichServiceContainer serviceContainer) => new RichDocumentPreviewServer(serviceContainer);
+        public static IRichDocumentPreviewServer Create(IRichServiceContainer serviceContainer) 
+            => new RichDocumentPreviewServer(serviceContainer);
 
         #endregion
 
@@ -265,10 +266,10 @@ namespace ISoft.RichReportDesigner.Core.RichEdit
             var streamService = _sourceServer.GetService<IUriStreamService>();
             if (streamService != null)
             {
-                var providerService = _sourceServer.GetService<IRichUriStreamProviderManagerService>();
-                if (providerService != null)
+                var registrationService = _sourceServer.GetService<IRichUriStreamRegistrationService>();
+                if (registrationService != null)
                 {
-                    providerService.RegisterUriStreamProviders(streamService);
+                    registrationService.RegisterUriStreamProviders(streamService);
                 }
             }
         }

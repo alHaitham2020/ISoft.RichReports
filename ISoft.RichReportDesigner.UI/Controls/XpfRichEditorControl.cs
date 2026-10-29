@@ -1,10 +1,8 @@
 ﻿using DevExpress.Data.Controls.ExpressionEditor;
 using DevExpress.Mvvm.Native;
-using DevExpress.Mvvm.POCO;
 using DevExpress.Mvvm.UI.Native;
 using DevExpress.Office.Utils;
 using DevExpress.Xpf.Core;
-using DevExpress.Xpf.ExpressionEditor;
 using DevExpress.Xpf.Printing;
 using DevExpress.Xpf.RichEdit;
 using DevExpress.Xpf.RichEdit.Localization;
@@ -12,7 +10,6 @@ using DevExpress.XtraPrinting;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.API.Layout;
 using DevExpress.XtraRichEdit.API.Native;
-using DevExpress.XtraRichEdit.Commands;
 using DevExpress.XtraRichEdit.Localization;
 using DevExpress.XtraRichEdit.Model;
 using DevExpress.XtraRichEdit.Services;
@@ -20,22 +17,17 @@ using ISoft.Core.UI.Helpers;
 using ISoft.Printing.Core.Xpf.Helpers;
 using ISoft.RichReportDesigner.Core.Constants;
 using ISoft.RichReportDesigner.Core.Designer;
-using ISoft.RichReportDesigner.Core.Fields.Core;
 using ISoft.RichReportDesigner.Core.Reports.DataModel;
 using ISoft.RichReportDesigner.Core.RichEdit;
 using ISoft.RichReportDesigner.Core.RichEdit.Expression;
-using ISoft.RichReportDesigner.Core.RichEdit.Highlighting;
-using ISoft.RichReportDesigner.UI.Controllers;
-using ISoft.RichReportDesigner.UI.Helpers;
-using ISoft.RichReportDesigner.UI.Internal;
 using ISoft.RichReportDesigner.UI.RichEdit.Commands;
 using ISoft.RichReportDesigner.UI.RichEdit.ExpressionEditor;
+using ISoft.RichReportDesigner.UI.RichEdit.Internal;
 using ISoft.RichReportDesigner.UI.RichEdit.Localization;
 using ISoft.RichReportDesigner.UI.RichEdit.Services;
 using ISoft.RichReportDesigner.UI.View;
 using ISoft.RichReportDesigner.UI.ViewModel;
 using ISoft.Utils.Helpers;
-using Microsoft.Extensions.Options;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -67,11 +59,11 @@ namespace ISoft.RichReportDesigner.UI.Controls
              .Register<XpfRichCommandProvider>(nameof(XpfCommandProvider), out XpfCommandProviderProperty, null);
         }
 
-        public XpfRichEditorControl():base()
+        public XpfRichEditorControl() : base()
         {
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
-            
+
             fieldKeyboardGuard = new RichEditFieldKeyboardGuard(this);
             XpfCommandProvider = new XpfRichCommandProvider(this);
         }

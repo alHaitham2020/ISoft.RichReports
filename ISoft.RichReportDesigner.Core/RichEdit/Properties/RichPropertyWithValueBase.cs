@@ -1,5 +1,5 @@
-﻿using ISoft.RichReportDesigner.Core.Fields.Format;
-using ISoft.RichReportDesigner.Core.Images;
+﻿using ISoft.Office.Images;
+using ISoft.RichReportDesigner.Core.Fields.Format;
 using ISoft.Utils.Helpers;
 using System;
 using System.Runtime.CompilerServices;

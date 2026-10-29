@@ -235,11 +235,10 @@ namespace ISoft.RichReportDesigner.Core.RichEdit
             }
         }
 
-
         /// <summary>
         /// Wraps a document mutation in <c>BeginUpdate</c> / <c>EndUpdate</c>.
         /// </summary>
-        public static TR ExecuteOperation<T,TR>(this T document, Func<T,TR> action) where T : SubDocument
+        public static TR ExecuteOperationWithResult<T,TR>(this T document, Func<T,TR> action) where T : SubDocument
         {
             ArgumentGuardHelper.ArgumentNotNull(document, nameof(document));
             ArgumentGuardHelper.ArgumentNotNull(action, nameof(action));
@@ -412,7 +411,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit
         {
             if (document == null || field == null) return;
 
-            document.ExecuteOperation(_ =>
+            document.ExecuteOperationWithResult(_ =>
                 field.WithFieldSubDocument(subDoc =>
                 {
                     subDoc.Delete(field.Range);
@@ -505,8 +504,8 @@ namespace ISoft.RichReportDesigner.Core.RichEdit
 
         #region Field discovery
 
-        public static IRichFieldCollection GetFields(this Document document, RichFieldSearchScope scope)
-            => RichFieldsDiscovery.GetFields(document, scope);
+        public static IRichFieldCollection GetFields(this Document document, RichDocumentSearchScope scope)
+            => RichDocumentDiscovery.GetFields(document, scope);
 
         /// <summary>
         /// Get all fields in all document sections
@@ -514,7 +513,7 @@ namespace ISoft.RichReportDesigner.Core.RichEdit
         /// <param name="document"></param>
         /// <returns></returns>
         public static IRichFieldCollection GetAllFields(this Document document)
-            => document.GetFields(RichFieldSearchScope.All);
+            => document.GetFields(RichDocumentSearchScope.All);
 
         #endregion
     }

@@ -13,7 +13,8 @@ namespace ISoft.RichReportDesigner.Core.Rendering
             _renderService = tableFieldsRenderService ?? throw new System.ArgumentNullException(nameof(tableFieldsRenderService));
         }
 
-        public RichDocumentRenderingService(IRichFieldManagerService fieldManagerService) : this(new RichTableFieldsRenderService(fieldManagerService))
+        public RichDocumentRenderingService(IRichFieldManagerService fieldManagerService) 
+            : this(new RichTableFieldsRenderService(fieldManagerService))
         {
 
         }

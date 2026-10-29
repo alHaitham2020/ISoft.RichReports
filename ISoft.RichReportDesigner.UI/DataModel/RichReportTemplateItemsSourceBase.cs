@@ -1,6 +1,5 @@
 ﻿using DevExpress.Mvvm.POCO;
 using ISoft.Mvvm.Data;
-using ISoft.RichReportDesigner.Core.Reports.DataModel;
 using ISoft.RichReportDesigner.Core.Templates;
 using ISoft.Utils.Data.AsyncData;
 using ISoft.Utils.Extentions;

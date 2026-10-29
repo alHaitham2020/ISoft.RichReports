@@ -11,7 +11,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
 
         IRichFieldCode CreateFieldWithOptions(object options, InstructionsBuilderTargets targets);
 
-        IRichFieldCode CreateFieldWithCommonOptions(RichFieldType fieldType, string firstArguemnt, RichFieldFormat? format = null);
+        IRichFieldCode CreateFieldWithCommonOptions(RichEditFieldType fieldType, string firstArguemnt, RichFieldFormat? format = null);
 
         IRichFieldCode CreateIfField(string expression1, string cmOperator, string expression2);
 
@@ -51,7 +51,7 @@ namespace ISoft.RichReportDesigner.Core.Fields.Codes
 
         IRichFieldCode CreatePictureField(RichIncludePictureFieldOptions options);
 
-        IRichFieldCode CreateField(RichFieldType fieldType);
+        IRichFieldCode CreateField(RichEditFieldType fieldType);
 
         string GetFieldSwitchesBuildString(object options);
 
